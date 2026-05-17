@@ -541,12 +541,7 @@
   }
   .formula-card .var-y { color: var(--y-700); font-weight: 600; }
 
-  /* ===== EVAL ===== */
-  .eval-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-  }
+  /* ===== METRIC CARDS ===== */
   .metric-card {
     background: var(--paper);
     border: 2px solid var(--ink);
@@ -574,6 +569,83 @@
     color: var(--ink-3);
     line-height: 1.5;
     font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ===== RULE ENGINE ===== */
+  .rule-pane {
+    background: var(--ink);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 10px 10px 0 var(--y-400), 10px 10px 0 1px var(--ink);
+  }
+  .rule-pane-header {
+    background: #2A2118;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .rule-pane-title {
+    color: rgba(255,255,255,0.45);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    margin-left: 10px;
+  }
+  .rule-pane-body {
+    padding: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    line-height: 1.85;
+    color: #E8DBC6;
+  }
+  .ry-comment { color: rgba(232,219,198,0.35); }
+  .ry-key     { color: #7AB8FF; }
+  .ry-val     { color: #9AE6B4; }
+  .ry-str     { color: var(--y-300); }
+  .ry-num     { color: #F9A8D4; }
+  .ry-op      { color: var(--y-400); font-weight: 700; }
+
+  .rule-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .rule-feat {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 16px;
+    padding: 22px;
+    transition: transform 0.25s, background 0.25s;
+  }
+  .rule-feat:hover { transform: translateY(-4px); background: var(--y-100); }
+  .rule-feat-icon {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  .rule-feat-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+  .rule-feat-desc {
+    font-size: 13px;
+    color: var(--ink-3);
+    line-height: 1.55;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .rule-tag {
+    display: inline-block;
+    background: var(--y-200);
+    border: 1px solid var(--ink);
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink-2);
+    margin-top: 10px;
   }
 
   /* ===== TECH ===== */
@@ -729,6 +801,7 @@
   }
   .squid-bubble {
     position: absolute;
+    z-index: 10;
     background: var(--paper);
     border: 2px solid var(--ink);
     border-radius: 16px;
@@ -736,7 +809,7 @@
     font-size: 12px;
     font-weight: 600;
     color: var(--ink);
-    bottom: 110px;
+    bottom: 148px;
     right: 50%;
     transform: translateX(50%) scale(0);
     transform-origin: bottom center;
@@ -764,6 +837,16 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .squid-inner { animation: none; }
+  }
+
+  /* ===== HERO TYPEWRITER ===== */
+  .h1-cursor {
+    display: inline-block;
+    color: var(--y-500);
+    font-weight: 300;
+    animation: blink 1s steps(2) infinite;
+    margin-left: 1px;
+    vertical-align: baseline;
   }
 
   /* ===== SCROLL REVEAL ===== */
@@ -798,13 +881,13 @@
   @media (max-width: 900px) {
     .nav-links { display: none; }
     .hero-grid, .fi-grid { grid-template-columns: 1fr; gap: 40px; }
-    .agents, .eval-grid { grid-template-columns: 1fr 1fr; }
+    .agents { grid-template-columns: 1fr 1fr; }
     .flow-diagram { grid-template-columns: 1fr; }
     .flow-arrow { transform: rotate(90deg); }
     .footer-inner { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 540px) {
-    .agents, .eval-grid, .footer-inner, .hero-stats { grid-template-columns: 1fr; }
+    .agents, .footer-inner, .hero-stats { grid-template-columns: 1fr; }
     .flow { padding: 32px 24px; }
     .cta-box { padding: 48px 24px; box-shadow: 6px 6px 0 var(--ink); }
   }
@@ -822,7 +905,8 @@
       <li><a href="#architecture">Architecture</a></li>
       <li><a href="#agents">Agents</a></li>
       <li><a href="#fi">FI Scoring</a></li>
-      <li><a href="#eval">Evaluation</a></li>
+      <li><a href="#rules">Rule Engine</a></li>
+      <li><a href="#integrations">Integrations</a></li>
       <li><a href="#docs">Docs</a></li>
     </ul>
     <a href="#" class="nav-cta">Deploy →</a>
@@ -844,20 +928,20 @@
       </p>
       <div class="hero-actions">
         <a href="#architecture" class="btn-primary">Explore the system →</a>
-        <a href="#eval" class="btn-secondary">View benchmarks</a>
+        <a href="#integrations" class="btn-secondary">Plug in your stack</a>
       </div>
       <div class="hero-stats">
         <div>
-          <div class="stat-num">481</div>
-          <div class="stat-label">Linux commands evaluated</div>
+          <div class="stat-num">BYO</div>
+          <div class="stat-label">Bring your own SIEM or LLM</div>
         </div>
         <div>
           <div class="stat-num">3</div>
           <div class="stat-label">Cooperating agents</div>
         </div>
         <div>
-          <div class="stat-num">4</div>
-          <div class="stat-label">Fidelity scoring methods</div>
+          <div class="stat-num">∞</div>
+          <div class="stat-label">Custom rules, zero redeploy</div>
         </div>
       </div>
     </div>
@@ -1050,52 +1134,140 @@ Recency_weight = 1 / (1 + age_min)</pre>
   </div>
 </section>
 
-<!-- EVALUATION -->
-<section id="eval" style="background: var(--y-50); border-radius: 32px; margin: 40px auto;">
+<!-- RULE ENGINE -->
+<section id="rules">
   <div class="section-head" data-reveal>
-    <div class="eyebrow">Evaluation</div>
-    <h2>Measured four ways, every time.</h2>
-    <p class="section-sub">Real output gets normalized (IPs, MACs, PIDs masked) then compared against ground truth with four orthogonal scorers — no single metric gets the last word.</p>
+    <div class="eyebrow">Rule Engine</div>
+    <h2>Your rules. Your trap.</h2>
+    <p class="section-sub">Drop a YAML file into <span style="font-family:'JetBrains Mono',monospace; font-size:15px;">rules/</span> and override anything — responses, FI weights, routing, alert thresholds. No code changes, no redeploy.</p>
   </div>
 
-  <div class="eval-grid">
-    <div class="metric-card" data-reveal data-delay="100">
-      <div class="icon">≈</div>
-      <div class="metric-name">Cosine</div>
-      <div class="metric-desc">TF-IDF cosine similarity. Catches semantic overlap.</div>
+  <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: start;">
+
+    <!-- Code pane -->
+    <div class="rule-pane" data-reveal="left">
+      <div class="rule-pane-header">
+        <span class="term-dot dot-r"></span>
+        <span class="term-dot dot-y"></span>
+        <span class="term-dot dot-g"></span>
+        <span class="rule-pane-title">rules/crypto_miner_trap.yaml</span>
+      </div>
+      <div class="rule-pane-body">
+        <div><span class="ry-comment"># match wget + .sh = fake a convincing download</span></div>
+        <div><span class="ry-op">-</span> <span class="ry-key">match</span>:</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="ry-key">command</span>: <span class="ry-str">"wget *"</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="ry-key">pattern</span>: <span class="ry-str">"*.sh"</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="ry-key">fi_min</span>: <span class="ry-num">1</span></div>
+        <div>&nbsp;&nbsp;<span class="ry-key">respond</span>:</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="ry-key">template</span>: <span class="ry-val">fake_download</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="ry-key">exit_code</span>: <span class="ry-num">0</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="ry-key">delay_ms</span>: <span class="ry-num">420</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="ry-key">inject</span>: <span class="ry-str">"Saving to: '{{filename}}' [12.4K]\n██ 100%"</span></div>
+        <br>
+        <div><span class="ry-comment"># high entropy pipe-to-shell = escalate + alert</span></div>
+        <div><span class="ry-op">-</span> <span class="ry-key">match</span>:</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="ry-key">entropy_gt</span>: <span class="ry-num">4.8</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="ry-key">pipe_to_shell</span>: <span class="ry-val">true</span></div>
+        <div>&nbsp;&nbsp;<span class="ry-key">respond</span>:</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="ry-key">agent</span>: <span class="ry-val">cloud</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="ry-key">fi_override</span>: <span class="ry-num">4</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="ry-key">alert</span>: <span class="ry-str">"siem:critical"</span></div>
+        <br>
+        <div><span class="ry-comment"># anything with sudo = slow the attacker down</span></div>
+        <div><span class="ry-op">-</span> <span class="ry-key">match</span>:</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="ry-key">command</span>: <span class="ry-str">"sudo *"</span></div>
+        <div>&nbsp;&nbsp;<span class="ry-key">respond</span>:</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="ry-key">template</span>: <span class="ry-val">fake_sudo_prompt</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="ry-key">delay_ms</span>: <span class="ry-num">1200</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="ry-key">loop</span>: <span class="ry-num">3</span>&nbsp;&nbsp;<span class="ry-comment"># wrong password, 3 times</span></div>
+      </div>
     </div>
-    <div class="metric-card" data-reveal data-delay="200">
-      <div class="icon">≣</div>
-      <div class="metric-name">Sequence</div>
-      <div class="metric-desc">difflib ratio. Measures structural match.</div>
+
+    <!-- Feature cards -->
+    <div data-reveal="right" data-delay="150">
+      <div class="rule-features">
+
+        <div class="rule-feat">
+          <div class="rule-feat-icon">⚙</div>
+          <div class="rule-feat-title">Pattern matching</div>
+          <div class="rule-feat-desc">Glob, regex, entropy threshold, pipe detection — match exactly what you care about.</div>
+          <span class="rule-tag">match: command / pattern / entropy_gt</span>
+        </div>
+
+        <div class="rule-feat">
+          <div class="rule-feat-icon">✎</div>
+          <div class="rule-feat-title">Response templates</div>
+          <div class="rule-feat-desc">Write static strings, use <code style="font-size:11px;">{{variables}}</code>, or point to a file. Injected verbatim into the shell session.</div>
+          <span class="rule-tag">template: / inject:</span>
+        </div>
+
+        <div class="rule-feat">
+          <div class="rule-feat-icon">⇄</div>
+          <div class="rule-feat-title">Agent override</div>
+          <div class="rule-feat-desc">Force a specific agent for any match — bypass the router entirely for rules you're confident about.</div>
+          <span class="rule-tag">agent: cowrie / ondevice / cloud</span>
+        </div>
+
+        <div class="rule-feat">
+          <div class="rule-feat-icon">◈</div>
+          <div class="rule-feat-title">FI weight override</div>
+          <div class="rule-feat-desc">Bump or lower the impact score for a specific command pattern without touching the classifier.</div>
+          <span class="rule-tag">fi_override: 0–4</span>
+        </div>
+
+        <div class="rule-feat">
+          <div class="rule-feat-icon">⏱</div>
+          <div class="rule-feat-title">Delay injection</div>
+          <div class="rule-feat-desc">Add realistic latency or loop fake prompts to keep the attacker spinning their wheels.</div>
+          <span class="rule-tag">delay_ms: / loop:</span>
+        </div>
+
+        <div class="rule-feat">
+          <div class="rule-feat-icon">🔔</div>
+          <div class="rule-feat-title">SIEM alerts</div>
+          <div class="rule-feat-desc">Tag a rule with <code style="font-size:11px;">alert:</code> and every match fires an enriched event straight to your pipeline.</div>
+          <span class="rule-tag">alert: "siem:critical"</span>
+        </div>
+
+      </div>
+
+      <div style="margin-top: 24px; background: var(--y-100); border: 2px solid var(--ink); border-radius: 14px; padding: 20px 24px; display: flex; align-items: center; gap: 16px;">
+        <div style="font-size: 28px; flex-shrink: 0;">↻</div>
+        <div>
+          <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">Hot-reload</div>
+          <div style="font-size: 13px; color: var(--ink-3); font-family: 'JetBrains Mono', monospace;">Drop a new <code>.yaml</code> into <code>rules/</code> while the honeypot is live. It picks it up on the next command — no restart, no dropped sessions.</div>
+        </div>
+      </div>
     </div>
-    <div class="metric-card" data-reveal data-delay="300">
-      <div class="icon">⌘</div>
-      <div class="metric-name">BLEU</div>
-      <div class="metric-desc">N-gram overlap against ground truth.</div>
-    </div>
-    <div class="metric-card" data-reveal data-delay="400">
-      <div class="icon">★</div>
-      <div class="metric-name">BERTScore</div>
-      <div class="metric-desc">RoBERTa F1 for deep semantic distance.</div>
-    </div>
+
+  </div>
+</section>
+
+<!-- INTEGRATIONS -->
+<section id="integrations" style="background: var(--y-50); border-radius: 32px; margin: 40px auto;">
+  <div class="section-head" data-reveal>
+    <div class="eyebrow">Integrations</div>
+    <h2>Plug in your own stack.</h2>
+    <p class="section-sub">hydraPOT ships with sensible defaults. Swap in your SIEM and your on-device LLM without touching the core.</p>
   </div>
 
-  <div style="margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
-    <div class="metric-card" data-reveal data-delay="100">
-      <div class="icon">⚡</div>
-      <div class="metric-name">Latency · GFLOPs · VRAM</div>
-      <div class="metric-desc">Per-inference cost: 2 × N × T (Kaplan et al. 2020), excluding embeddings.</div>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+    <div class="metric-card" style="padding: 36px;" data-reveal data-delay="100">
+      <div class="icon">⇌</div>
+      <div class="metric-name" style="font-size: 18px; margin-bottom: 10px;">SIEM Integration</div>
+      <div class="metric-desc" style="font-size: 13px; line-height: 1.65; margin-bottom: 20px;">Every command, FI score, agent decision, and raw response is emitted as a structured JSON event. Point the webhook at Splunk, Elastic, Graylog, or any custom pipeline — the format stays the same.</div>
+      <pre style="background: var(--ink); color: var(--y-300); padding: 14px 16px; border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.7; overflow-x: auto;">HYDRAPOT_SIEM_ENDPOINT=http://splunk:8088/services/collector \
+python main.py</pre>
+      <p style="font-size: 12px; color: var(--ink-3); margin-top: 14px; font-family: 'JetBrains Mono', monospace;">Splunk HEC · Elastic Logstash · custom webhook · stdout JSONL</p>
     </div>
-    <div class="metric-card" data-reveal data-delay="200">
-      <div class="icon">$</div>
-      <div class="metric-name">Cost analysis</div>
-      <div class="metric-desc">$0.10/mo budget vs Novita pricing. On-device runs free.</div>
-    </div>
-    <div class="metric-card" data-reveal data-delay="300">
-      <div class="icon">⌗</div>
-      <div class="metric-name">Cyberlab dataset</div>
-      <div class="metric-desc">Real attack sessions replayed in isolated Ubuntu Docker.</div>
+
+    <div class="metric-card" style="padding: 36px;" data-reveal data-delay="200">
+      <div class="icon">◉</div>
+      <div class="metric-name" style="font-size: 18px; margin-bottom: 10px;">On-Device LLM</div>
+      <div class="metric-desc" style="font-size: 13px; line-height: 1.65; margin-bottom: 20px;">The <span style="font-family: 'JetBrains Mono', monospace;">ondevice_agent</span> loader is model-agnostic. Swap Qwen for Phi-3, Mistral, Gemma, or any HuggingFace checkpoint by setting one env var — session state and the FI router wire up automatically.</div>
+      <pre style="background: var(--ink); color: var(--y-300); padding: 14px 16px; border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.7; overflow-x: auto;">ONDEVICE_MODEL=microsoft/Phi-3-mini-4k-instruct \
+python main.py</pre>
+      <p style="font-size: 12px; color: var(--ink-3); margin-top: 14px; font-family: 'JetBrains Mono', monospace;">Qwen2.5 · Phi-3 · Mistral · Gemma · any GGUF via llama.cpp</p>
     </div>
   </div>
 </section>
@@ -1131,14 +1303,14 @@ $ python main.py</pre>
       <a href="#architecture">Architecture</a>
       <a href="#agents">Agents</a>
       <a href="#fi">FI Scoring</a>
-      <a href="#">Router logic</a>
+      <a href="#rules">Rule Engine</a>
     </div>
     <div>
-      <h4>Evaluation</h4>
-      <a href="#eval">Metrics</a>
-      <a href="#">Cowrie eval</a>
-      <a href="#">On-device eval</a>
-      <a href="#">Cost analysis</a>
+      <h4>Integrations</h4>
+      <a href="#integrations">SIEM setup</a>
+      <a href="#integrations">On-device LLM</a>
+      <a href="#">HuggingFace models</a>
+      <a href="#">Webhook format</a>
     </div>
     <div>
       <h4>Project</h4>
@@ -1505,6 +1677,56 @@ $ python main.py</pre>
 
     runSequence();
   })();
+
+  // ===== HERO H1 TYPEWRITER =====
+  (function() {
+    var h1 = document.querySelector('.hero h1');
+    if (!h1) return;
+
+    var segments = [
+      { text: 'Bait. ' },
+      { text: 'Trick.', cls: 'swirl' },
+      { br: true },
+      { text: 'Learn from ' },
+      { text: 'every', cls: 'accent' },
+      { br: true },
+      { text: 'intruder.' },
+    ];
+
+    h1.innerHTML = '';
+
+    var CHAR_DELAY = 62;
+
+    // Pre-build all child elements in order (empty), then type into each
+    var targets = [];
+    segments.forEach(function(seg) {
+      if (seg.br) { h1.appendChild(document.createElement('br')); return; }
+      var el = document.createElement('span');
+      if (seg.cls) el.className = seg.cls;
+      h1.appendChild(el);
+      targets.push({ el: el, text: seg.text });
+    });
+
+    var cursor = document.createElement('span');
+    cursor.className = 'h1-cursor';
+    cursor.textContent = '|';
+    h1.appendChild(cursor);
+
+    var tIdx = 0, cIdx = 0;
+    function tick() {
+      if (tIdx >= targets.length) { cursor.remove(); return; }
+      var t = targets[tIdx];
+      cIdx++;
+      t.el.textContent = t.text.slice(0, cIdx);
+      if (cIdx >= t.text.length) { tIdx++; cIdx = 0; }
+      setTimeout(tick, CHAR_DELAY);
+    }
+
+    // Wait for the reveal fade-in (0.8s) before starting
+    var startDelay = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 100 : 900;
+    setTimeout(tick, startDelay);
+  })();
 </script>
+
 </body>
 </html>
