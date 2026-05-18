@@ -877,6 +877,291 @@
     }
   }
 
+  /* ===== WHY / COMPARISON ===== */
+  .why-dark {
+    background: var(--ink);
+    border-radius: 32px;
+    padding: 60px;
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+  .why-dark::before {
+    content: "";
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 350px; height: 350px;
+    background: var(--y-500);
+    border-radius: 50%;
+    opacity: 0.09;
+    filter: blur(70px);
+    pointer-events: none;
+  }
+  .why-dark h2 { color: var(--paper); }
+  .why-dark .eyebrow { color: var(--y-300); }
+  .why-dark .section-sub { color: rgba(255,252,242,0.6); }
+  .vs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.1fr;
+    gap: 16px;
+    margin-top: 48px;
+  }
+  .vs-card { border-radius: 20px; padding: 28px 24px; position: relative; }
+  .vs-bad  { background: rgba(255,252,242,0.04); border: 1px solid rgba(252,211,77,0.14); }
+  .vs-good { background: var(--y-400); }
+  .vs-good-tag {
+    position: absolute;
+    top: -13px; left: 50%;
+    transform: translateX(-50%);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 11px; font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 999px;
+    border: 2px solid var(--ink);
+    white-space: nowrap;
+  }
+  .vs-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: rgba(255,252,242,0.4);
+    margin-bottom: 6px;
+  }
+  .vs-good .vs-label { color: var(--ink-2); }
+  .vs-title {
+    font-size: 20px; font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--paper);
+    margin-bottom: 20px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(255,252,242,0.1);
+  }
+  .vs-good .vs-title { color: var(--ink); border-bottom-color: rgba(26,20,16,0.15); }
+  .vs-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .vs-item { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; line-height: 1.45; }
+  .vs-item.pro { color: rgba(255,252,242,0.85); }
+  .vs-item.con { color: rgba(255,252,242,0.32); }
+  .vs-good .vs-item.pro { color: var(--ink); }
+  .vs-good .vs-item.con { color: rgba(26,20,16,0.32); }
+  .vi-pro {
+    flex-shrink: 0;
+    width: 16px; height: 16px;
+    background: var(--y-400);
+    border-radius: 4px;
+    display: grid; place-items: center;
+    font-size: 9px; font-weight: 900;
+    color: var(--ink); margin-top: 1px;
+  }
+  .vs-good .vi-pro { background: var(--ink); color: var(--y-400); }
+  .vi-con {
+    flex-shrink: 0;
+    width: 16px; text-align: center;
+    color: rgba(255,252,242,0.18);
+    font-size: 13px; line-height: 16px;
+    margin-top: 1px;
+  }
+  .vs-good .vi-con { color: rgba(26,20,16,0.22); }
+
+  /* ===== PROVIDER BADGES ===== */
+  .provider-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .pbadge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px; border-radius: 8px;
+    font-size: 12px; font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+    border: 1.5px solid transparent;
+  }
+  .pbadge:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.25); }
+  .pbadge svg, .pbadge .pbadge-icon { flex-shrink: 0; }
+  .pbadge-icon {
+    width: 18px; height: 18px;
+    border-radius: 4px;
+    display: grid; place-items: center;
+    font-size: 11px; font-weight: 900;
+  }
+
+  /* ===== STAGGER REVEAL ===== */
+  .stagger-reveal > * {
+    opacity: 0;
+    transform: translateY(30px) scale(0.97);
+    transition: opacity 0.55s cubic-bezier(0.16,1,0.3,1),
+                transform 0.55s cubic-bezier(0.16,1,0.3,1);
+  }
+  .stagger-reveal.is-visible > *:nth-child(1) { opacity:1; transform:none; transition-delay:0.00s; }
+  .stagger-reveal.is-visible > *:nth-child(2) { opacity:1; transform:none; transition-delay:0.10s; }
+  .stagger-reveal.is-visible > *:nth-child(3) { opacity:1; transform:none; transition-delay:0.20s; }
+  .stagger-reveal.is-visible > *:nth-child(4) { opacity:1; transform:none; transition-delay:0.30s; }
+  .stagger-reveal.is-visible > *:nth-child(5) { opacity:1; transform:none; transition-delay:0.40s; }
+  .stagger-reveal.is-visible > *:nth-child(6) { opacity:1; transform:none; transition-delay:0.50s; }
+  .stagger-reveal.is-visible > *:nth-child(7) { opacity:1; transform:none; transition-delay:0.60s; }
+  .stagger-reveal.is-visible > *:nth-child(8) { opacity:1; transform:none; transition-delay:0.70s; }
+  @media (prefers-reduced-motion: reduce) {
+    .stagger-reveal > * { opacity:1 !important; transform:none !important; transition:none !important; }
+  }
+
+  /* ===== DOCS OVERLAY ===== */
+  .docs-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.28s;
+  }
+  .docs-overlay.open { opacity: 1; pointer-events: auto; }
+  .docs-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(26,20,16,0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  .docs-sheet {
+    position: relative;
+    margin-left: auto;
+    width: min(960px, 100%);
+    height: 100%;
+    background: var(--paper);
+    border-left: 2px solid var(--ink);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(48px);
+    transition: transform 0.38s cubic-bezier(0.16,1,0.3,1);
+  }
+  .docs-overlay.open .docs-sheet { transform: translateX(0); }
+  .docs-sheet-head {
+    padding: 18px 28px;
+    border-bottom: 2px solid var(--ink);
+    background: var(--y-100);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .docs-sheet-body {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .docs-close {
+    width: 34px; height: 34px;
+    background: var(--ink); color: var(--y-300);
+    border: none; border-radius: 8px;
+    cursor: pointer; display: grid; place-items: center;
+    font-size: 16px; line-height: 1;
+    transition: background 0.2s;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .docs-close:hover { background: var(--y-700); color: var(--paper); }
+
+  /* ===== DOCS INNER ===== */
+  .docs-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .doc-tabs {
+    display: flex;
+    overflow-x: auto;
+    border-bottom: 2px solid var(--ink);
+    background: var(--y-100);
+    scrollbar-width: none;
+  }
+  .doc-tabs::-webkit-scrollbar { display: none; }
+  .doc-tab {
+    flex-shrink: 0;
+    padding: 13px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-3);
+    background: transparent;
+    border: none;
+    border-right: 1px solid var(--line);
+    cursor: pointer;
+    transition: color 0.18s, background 0.18s;
+    font-family: 'Inter', sans-serif;
+    white-space: nowrap;
+  }
+  .doc-tab:hover  { color: var(--ink); background: var(--y-200); }
+  .doc-tab.active { background: var(--y-400); color: var(--ink); font-weight: 700; }
+  .doc-panel      { display: none; padding: 40px; animation: docFadeIn 0.25s ease; }
+  .doc-panel.active { display: block; }
+  @keyframes docFadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+
+  .doc-h3 { font-size: 18px; font-weight: 700; letter-spacing:-0.02em; margin: 28px 0 8px; }
+  .doc-h3:first-child { margin-top: 0; }
+  .doc-p  { font-size: 14px; color: var(--ink-3); line-height: 1.7; margin-bottom: 18px; }
+
+  .doc-steps { list-style: none; margin-bottom: 24px; display: flex; flex-direction: column; gap: 18px; }
+  .doc-step  { display: flex; gap: 16px; align-items: flex-start; }
+  .doc-step-num {
+    flex-shrink: 0; width: 30px; height: 30px;
+    background: var(--y-400); border: 2px solid var(--ink);
+    border-radius: 8px; display: grid; place-items: center;
+    font-weight: 800; font-size: 13px; margin-top: 2px;
+  }
+  .doc-step-body h4  { font-size: 14px; font-weight: 700; margin-bottom: 5px; }
+  .doc-step-body p   { font-size: 13px; color: var(--ink-3); line-height: 1.55; margin-bottom: 8px; }
+
+  .doc-code {
+    background: var(--ink); color: var(--y-300);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px; line-height: 1.85;
+    padding: 14px 18px; border-radius: 10px;
+    overflow-x: auto; margin: 6px 0 12px;
+    white-space: pre;
+  }
+  .doc-code .cmt { color: rgba(252,211,77,0.4); }
+  .doc-code .kw  { color: #7AB8FF; }
+  .doc-code .str { color: #9AE6B4; }
+  .doc-code .num { color: #F9A8D4; }
+
+  .doc-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; border-radius: 12px; overflow: hidden; border: 1.5px solid var(--ink); }
+  .doc-table th { background: var(--y-200); color: var(--ink); font-weight: 700; padding: 11px 14px; text-align: left; border-bottom: 2px solid var(--ink); }
+  .doc-table td { padding: 10px 14px; color: var(--ink-2); border-top: 1px solid var(--line); vertical-align: top; line-height: 1.5; }
+  .doc-table tr:nth-child(even) td { background: var(--y-50); }
+  .doc-table code { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; background: var(--y-100); padding: 1px 5px; border-radius: 4px; }
+
+  .fi-pip {
+    display: inline-block; width: 26px; height: 26px;
+    border-radius: 6px; border: 2px solid var(--ink);
+    font-family: 'JetBrains Mono', monospace; font-weight: 800;
+    font-size: 12px; text-align: center; line-height: 22px; vertical-align: middle;
+  }
+  .fi-pip.f0 { background: var(--paper); }
+  .fi-pip.f1 { background: var(--y-100); }
+  .fi-pip.f2 { background: var(--y-300); }
+  .fi-pip.f3 { background: var(--y-500); color: var(--paper); }
+  .fi-pip.f4 { background: var(--ink); color: var(--y-400); }
+
+  .doc-flow { display: flex; flex-direction: column; gap: 0; margin-bottom: 28px; }
+  .doc-flow-row { display: flex; gap: 14px; align-items: stretch; }
+  .doc-flow-spine { display: flex; flex-direction: column; align-items: center; width: 28px; flex-shrink: 0; }
+  .doc-flow-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--y-400); border: 2px solid var(--ink); flex-shrink: 0; margin-top: 3px; }
+  .doc-flow-line { width: 2px; flex: 1; background: var(--line-strong); min-height: 12px; margin: 3px 0; }
+  .doc-flow-body { padding-bottom: 20px; flex: 1; }
+  .doc-flow-title { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
+  .doc-flow-sub   { font-size: 12.5px; color: var(--ink-3); line-height: 1.55; font-family: 'JetBrains Mono', monospace; }
+
+  .doc-limit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
+  .doc-limit-card { background: var(--y-50); border: 1.5px solid var(--line); border-radius: 12px; padding: 16px; }
+  .doc-limit-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 5px; }
+  .doc-limit-card p  { font-size: 12px; color: var(--ink-3); line-height: 1.55; font-family: 'JetBrains Mono', monospace; }
+
+  .doc-road-item { display: flex; gap: 12px; align-items: flex-start; padding: 13px 0; border-top: 1px solid var(--line); }
+  .doc-road-item:last-child { border-bottom: 1px solid var(--line); }
+  .doc-road-tag { flex-shrink: 0; background: var(--ink); color: var(--y-300); font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 5px; white-space: nowrap; margin-top: 1px; }
+  .doc-road-text { font-size: 13.5px; color: var(--ink-2); line-height: 1.55; }
+
   /* Responsive */
   @media (max-width: 900px) {
     .nav-links { display: none; }
@@ -885,6 +1170,10 @@
     .flow-diagram { grid-template-columns: 1fr; }
     .flow-arrow { transform: rotate(90deg); }
     .footer-inner { grid-template-columns: 1fr 1fr; }
+    .vs-grid { grid-template-columns: 1fr; }
+    .why-dark { padding: 40px 28px; }
+    .doc-limit-grid { grid-template-columns: 1fr; }
+    .doc-panel { padding: 24px; }
   }
   @media (max-width: 540px) {
     .agents, .footer-inner, .hero-stats { grid-template-columns: 1fr; }
@@ -899,15 +1188,17 @@
   <div class="nav-inner">
     <div class="logo">
       <div class="logo-mark">H</div>
-      hydraPOT
+      HydraPoT
     </div>
     <ul class="nav-links">
       <li><a href="#architecture">Architecture</a></li>
+      <li><a href="#why">Why HydraPoT</a></li>
       <li><a href="#agents">Agents</a></li>
       <li><a href="#fi">FI Scoring</a></li>
       <li><a href="#rules">Rule Engine</a></li>
       <li><a href="#integrations">Integrations</a></li>
-      <li><a href="#docs">Docs</a></li>
+      <li><a href="#" id="docsNavBtn">Docs</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
     </ul>
     <a href="#" class="nav-cta">Deploy →</a>
   </div>
@@ -924,7 +1215,7 @@
         intruder.
       </h1>
       <p class="hero-sub">
-        A multi-agent SSH honeypot that convinces attackers they're on a real Linux box. Three agents collaborate — Cowrie, an on-device Qwen LLM, and a cloud fallback — routed by a fidelity-aware classifier.
+        Traditional honeypots break the moment attackers go off-script. HydraPoT doesn't. Three specialized agents — Cowrie, an on-device Qwen LLM, and a GPT-5 cloud fallback — collaborate in real time, routed by a fidelity-aware classifier that keeps every session convincing.
       </p>
       <div class="hero-actions">
         <a href="#architecture" class="btn-primary">Explore the system →</a>
@@ -933,15 +1224,15 @@
       <div class="hero-stats">
         <div>
           <div class="stat-num">BYO</div>
-          <div class="stat-label">Bring your own SIEM or LLM</div>
+          <div class="stat-label">Your LLM, your SIEM, your rules — zero lock-in</div>
         </div>
         <div>
           <div class="stat-num">3</div>
           <div class="stat-label">Cooperating agents</div>
         </div>
         <div>
-          <div class="stat-num">∞</div>
-          <div class="stat-label">Custom rules, zero redeploy</div>
+          <div class="stat-num">97%</div>
+          <div class="stat-label">Cloud cost cut by the Honey Router</div>
         </div>
       </div>
     </div>
@@ -964,7 +1255,7 @@
     <div class="section-head">
       <div class="eyebrow">Architecture</div>
       <h2>One command, three brains.</h2>
-      <p class="section-sub">Every keystroke flows through the router, gets scored for fidelity impact, and is dispatched to the agent best equipped to fake its output.</p>
+      <p class="section-sub">Every keystroke flows through the Honey Router, gets scored for fidelity impact, and is dispatched to the agent best equipped to fake its output — all in under 500 ms for routine commands.</p>
     </div>
 
     <div class="flow-diagram">
@@ -994,12 +1285,70 @@
       </div>
       <div class="flow-branch">
         <div class="flow-branch-name">ondevice_agent</div>
-        <div class="flow-branch-sub">Qwen2.5-1.5B-Instruct</div>
+        <div class="flow-branch-sub">Qwen2.5-Coder-7B</div>
       </div>
       <div class="flow-branch">
         <div class="flow-branch-name">cloud_agent</div>
-        <div class="flow-branch-sub">Llama 3.1 · Novita</div>
+        <div class="flow-branch-sub">GPT-5 · API</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY HYDRAPOT -->
+<section id="why">
+  <div class="why-dark" data-reveal="scale">
+    <div class="section-head">
+      <div class="eyebrow">Why HydraPoT</div>
+      <h2>Static traps lie.<br>API-only traps drain your wallet.</h2>
+      <p class="section-sub">HydraPoT routes every command to the cheapest agent that can still fool the attacker — spending zero cloud credits on simple recon and saving GPT-5 power for when it actually matters.</p>
+    </div>
+
+    <div class="vs-grid stagger-reveal">
+
+      <!-- COWRIE ALONE -->
+      <div class="vs-card vs-bad">
+        <div class="vs-label">Traditional</div>
+        <div class="vs-title">Cowrie alone</div>
+        <ul class="vs-list">
+          <li class="vs-item pro"><span class="vi-pro">✓</span>Fast &amp; authentic for basic commands</li>
+          <li class="vs-item pro"><span class="vi-pro">✓</span>Zero API cost</li>
+          <li class="vs-item con"><span class="vi-con">✗</span>Breaks on complex or chained scripts</li>
+          <li class="vs-item con"><span class="vi-con">✗</span>No session context memory</li>
+          <li class="vs-item con"><span class="vi-con">✗</span>Fails silently on obfuscated commands</li>
+          <li class="vs-item con"><span class="vi-con">✗</span>Static, pre-configured responses only</li>
+        </ul>
+      </div>
+
+      <!-- LLM ONLY -->
+      <div class="vs-card vs-bad">
+        <div class="vs-label">LLM-Only Honeypot</div>
+        <div class="vs-title">ShelLM &amp; similar</div>
+        <ul class="vs-list">
+          <li class="vs-item pro"><span class="vi-pro">✓</span>Flexible, handles novel commands</li>
+          <li class="vs-item pro"><span class="vi-pro">✓</span>Creative &amp; context-aware responses</li>
+          <li class="vs-item con"><span class="vi-con">✗</span>Every command hits the API — costs add up fast</li>
+          <li class="vs-item con"><span class="vi-con">✗</span>No memory between commands</li>
+          <li class="vs-item con"><span class="vi-con">✗</span>Slow on trivial <span style="font-family:'JetBrains Mono',monospace">ls</span> / <span style="font-family:'JetBrains Mono',monospace">whoami</span></li>
+          <li class="vs-item con"><span class="vi-con">✗</span>Locked to one API vendor</li>
+        </ul>
+      </div>
+
+      <!-- HYDRAPOT -->
+      <div class="vs-card vs-good">
+        <div class="vs-good-tag">★ HydraPoT</div>
+        <div class="vs-label">Intelligent routing</div>
+        <div class="vs-title">Best of both worlds</div>
+        <ul class="vs-list">
+          <li class="vs-item pro"><span class="vi-pro">✓</span>Cowrie handles routine recon — fast, free</li>
+          <li class="vs-item pro"><span class="vi-pro">✓</span>On-device LLM for complex commands — no API cost</li>
+          <li class="vs-item pro"><span class="vi-pro">✓</span>GPT-5 only when the attacker goes deep</li>
+          <li class="vs-item pro"><span class="vi-pro">✓</span>Full session context across all three agents</li>
+          <li class="vs-item pro"><span class="vi-pro">✓</span>Handles base64, reverse shells, multi-pipe payloads</li>
+          <li class="vs-item pro"><span class="vi-pro">✓</span>BYO LLM &amp; SIEM — zero vendor lock-in</li>
+        </ul>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1009,7 +1358,7 @@
   <div class="section-head" data-reveal>
     <div class="eyebrow">Three agents</div>
     <h2>Each one plays its role.</h2>
-    <p class="section-sub">The router picks the cheapest agent that can still produce a believable response. Cowrie handles the boring stuff. The LLMs take over when context matters.</p>
+    <p class="section-sub">The Honey Router picks the cheapest agent that can still produce a believable response — saving 97% of cloud spend. Cowrie handles routine recon. LLMs take over when context and creativity are the only thing keeping the session convincing.</p>
   </div>
 
   <div class="agents">
@@ -1029,7 +1378,7 @@
       <div class="agent-num">02 / ondevice_agent.py</div>
       <div class="agent-icon">◉</div>
       <div class="agent-title">On-Device LLM</div>
-      <div class="agent-desc">Qwen2.5-1.5B-Instruct loaded in-process. Carries session state so fake files "exist" across commands.</div>
+      <div class="agent-desc">Qwen2.5-Coder-7B running locally — no API calls, zero latency tax. Carries full session state so fake files, services, and processes stay consistent across commands.</div>
       <ul class="agent-handles">
         <li>./script.sh execution</li>
         <li>systemctl status</li>
@@ -1041,7 +1390,7 @@
       <div class="agent-num">03 / cloud_agent.py</div>
       <div class="agent-icon">☁</div>
       <div class="agent-title">Cloud Fallback</div>
-      <div class="agent-desc">Llama 3.1 8B via Novita. Reserved for obfuscated, high-entropy, or chained shell payloads.</div>
+      <div class="agent-desc">GPT-5 via API. Reserved for the commands that would fool nothing else — obfuscated payloads, base64 blobs, reverse shells, and multi-stage exploits. The heaviest weapon in the stack, deployed only when the situation demands it.</div>
       <ul class="agent-handles">
         <li>entropy &gt; 4.8</li>
         <li>pipe-to-shell</li>
@@ -1056,18 +1405,18 @@
   <div class="tech-track">
     <div class="tech-item">Python 3.10</div>
     <div class="tech-item">Cowrie</div>
-    <div class="tech-item">Qwen2.5-1.5B</div>
+    <div class="tech-item">Qwen2.5-Coder-7B</div>
     <div class="tech-item">paramiko</div>
     <div class="tech-item">HuggingFace</div>
     <div class="tech-item">Docker</div>
-    <div class="tech-item">BERTScore</div>
+    <div class="tech-item">Session Memory</div>
     <div class="tech-item">Python 3.10</div>
     <div class="tech-item">Cowrie</div>
-    <div class="tech-item">Qwen2.5-1.5B</div>
+    <div class="tech-item">Qwen2.5-Coder-7B</div>
     <div class="tech-item">paramiko</div>
     <div class="tech-item">HuggingFace</div>
     <div class="tech-item">Docker</div>
-    <div class="tech-item">BERTScore</div>
+    <div class="tech-item">Session Memory</div>
   </div>
 </div>
 
@@ -1076,7 +1425,7 @@
   <div class="section-head" data-reveal>
     <div class="eyebrow">Fidelity Impact</div>
     <h2>Not all commands are dangerous.</h2>
-    <p class="section-sub">Every command earns an FI score from 0 to 4. The score decides what gets logged, what stays in the LLM's context window, and what triggers the cloud fallback.</p>
+    <p class="section-sub">Every command earns an FI score from 0 to 4. The score decides which agent responds, what gets logged, what stays in the LLM's context window, and when to escalate to the cloud fallback.</p>
   </div>
 
   <div class="fi-grid">
@@ -1248,41 +1597,587 @@ Recency_weight = 1 / (1 + age_min)</pre>
   <div class="section-head" data-reveal>
     <div class="eyebrow">Integrations</div>
     <h2>Plug in your own stack.</h2>
-    <p class="section-sub">hydraPOT ships with sensible defaults. Swap in your SIEM and your on-device LLM without touching the core.</p>
+    <p class="section-sub">HydraPoT ships with sensible defaults and gets out of the way. Point it at your existing SIEM, swap in any HuggingFace model, and the rest wires up automatically.</p>
   </div>
 
   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
     <div class="metric-card" style="padding: 36px;" data-reveal data-delay="100">
       <div class="icon">⇌</div>
-      <div class="metric-name" style="font-size: 18px; margin-bottom: 10px;">SIEM Integration</div>
-      <div class="metric-desc" style="font-size: 13px; line-height: 1.65; margin-bottom: 20px;">Every command, FI score, agent decision, and raw response is emitted as a structured JSON event. Point the webhook at Splunk, Elastic, Graylog, or any custom pipeline — the format stays the same.</div>
+      <div class="metric-name" style="font-size: 18px; margin-bottom: 10px;">Plug In Your Own SIEM</div>
+      <div class="metric-desc" style="font-size: 13px; line-height: 1.65; margin-bottom: 20px;">Every command, FI score, agent decision, and raw response is emitted as a structured JSON event. One env var points it at any pipeline — the schema never changes.</div>
       <pre style="background: var(--ink); color: var(--y-300); padding: 14px 16px; border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.7; overflow-x: auto;">HYDRAPOT_SIEM_ENDPOINT=http://splunk:8088/services/collector \
 python main.py</pre>
-      <p style="font-size: 12px; color: var(--ink-3); margin-top: 14px; font-family: 'JetBrains Mono', monospace;">Splunk HEC · Elastic Logstash · custom webhook · stdout JSONL</p>
+      <div class="provider-grid" style="margin-top: 18px;">
+        <!-- Splunk -->
+        <span class="pbadge" style="background:#1A1410; color:#65C637; border-color:#65C637;">
+          <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#65C637"/><path d="M4 8.5l4-4 4 4-4 4z" fill="#1A1410"/></svg>
+          Splunk
+        </span>
+        <!-- Elastic -->
+        <span class="pbadge" style="background:#FEC514; color:#1A1410; border-color:#FEC514;">
+          <svg width="16" height="16" viewBox="0 0 16 16"><rect width="16" height="16" rx="4" fill="#FEC514"/><rect x="3" y="5" width="10" height="2" rx="1" fill="#1A1410"/><rect x="3" y="9" width="10" height="2" rx="1" fill="#1A1410"/></svg>
+          Elastic
+        </span>
+        <!-- Graylog -->
+        <span class="pbadge" style="background:#2F2F3A; color:#FF3633; border-color:#FF3633;">
+          <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="none" stroke="#FF3633" stroke-width="2"/><circle cx="8" cy="8" r="3" fill="#FF3633"/></svg>
+          Graylog
+        </span>
+        <!-- Webhook -->
+        <span class="pbadge" style="background:var(--y-100); color:var(--ink); border-color:var(--ink);">
+          <svg width="16" height="16" viewBox="0 0 16 16"><path d="M2 8 Q4 2 8 8 Q12 14 14 8" fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round"/></svg>
+          Custom Webhook
+        </span>
+        <!-- stdout JSONL -->
+        <span class="pbadge" style="background:var(--ink); color:var(--y-300); border-color:var(--ink);">
+          <svg width="16" height="16" viewBox="0 0 16 16"><rect x="2" y="4" width="12" height="2" rx="1" fill="var(--y-300)"/><rect x="2" y="7" width="8" height="2" rx="1" fill="var(--y-300)"/><rect x="2" y="10" width="10" height="2" rx="1" fill="var(--y-300)"/></svg>
+          stdout JSONL
+        </span>
+      </div>
     </div>
 
     <div class="metric-card" style="padding: 36px;" data-reveal data-delay="200">
       <div class="icon">◉</div>
-      <div class="metric-name" style="font-size: 18px; margin-bottom: 10px;">On-Device LLM</div>
-      <div class="metric-desc" style="font-size: 13px; line-height: 1.65; margin-bottom: 20px;">The <span style="font-family: 'JetBrains Mono', monospace;">ondevice_agent</span> loader is model-agnostic. Swap Qwen for Phi-3, Mistral, Gemma, or any HuggingFace checkpoint by setting one env var — session state and the FI router wire up automatically.</div>
+      <div class="metric-name" style="font-size: 18px; margin-bottom: 10px;">Choose Your On-Device Model</div>
+      <div class="metric-desc" style="font-size: 13px; line-height: 1.65; margin-bottom: 20px;">The <span style="font-family:'JetBrains Mono',monospace;">ondevice_agent</span> loader is model-agnostic. Ships with Qwen2.5-Coder-7B. Swap to any HuggingFace checkpoint or run locally via Ollama — session state and the FI router wire up automatically.</div>
       <pre style="background: var(--ink); color: var(--y-300); padding: 14px 16px; border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.7; overflow-x: auto;">ONDEVICE_MODEL=microsoft/Phi-3-mini-4k-instruct \
 python main.py</pre>
-      <p style="font-size: 12px; color: var(--ink-3); margin-top: 14px; font-family: 'JetBrains Mono', monospace;">Qwen2.5 · Phi-3 · Mistral · Gemma · any GGUF via llama.cpp</p>
+      <div class="provider-grid" style="margin-top: 18px;">
+        <!-- HuggingFace -->
+        <span class="pbadge" style="background:#FF9D00; color:#1A1410; border-color:#FF9D00;">
+          <svg width="18" height="18" viewBox="0 0 20 20">
+            <circle cx="10" cy="10" r="10" fill="#FF9D00"/>
+            <circle cx="6.8" cy="8.5" r="1.7" fill="#1A1410"/>
+            <circle cx="13.2" cy="8.5" r="1.7" fill="#1A1410"/>
+            <path d="M6.5 13.5 Q10 16 13.5 13.5" stroke="#1A1410" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+            <path d="M4 5.5 Q4.5 3 6 4" stroke="#1A1410" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+            <path d="M16 5.5 Q15.5 3 14 4" stroke="#1A1410" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          </svg>
+          HuggingFace
+        </span>
+        <!-- Ollama -->
+        <span class="pbadge" style="background:#1C1C1E; color:#fff; border-color:#3A3A3C;">
+          <svg width="18" height="18" viewBox="0 0 20 20">
+            <rect width="20" height="20" rx="5" fill="#1C1C1E"/>
+            <!-- llama silhouette simplified -->
+            <ellipse cx="10" cy="12" rx="5.5" ry="4.5" fill="#fff"/>
+            <!-- ears -->
+            <ellipse cx="6.5" cy="6.5" rx="1.8" ry="3" fill="#fff" transform="rotate(-8 6.5 6.5)"/>
+            <ellipse cx="13.5" cy="6.5" rx="1.8" ry="3" fill="#fff" transform="rotate(8 13.5 6.5)"/>
+            <!-- face -->
+            <circle cx="7.8" cy="11.5" r="1" fill="#1C1C1E"/>
+            <circle cx="12.2" cy="11.5" r="1" fill="#1C1C1E"/>
+            <ellipse cx="10" cy="13.5" rx="2.5" ry="1.5" fill="#ddd"/>
+          </svg>
+          Ollama
+        </span>
+        <!-- OpenAI -->
+        <span class="pbadge" style="background:#10A37F; color:#fff; border-color:#10A37F;">
+          <svg width="16" height="16" viewBox="0 0 16 16">
+            <circle cx="8" cy="8" r="8" fill="#10A37F"/>
+            <path d="M8 3 A5 5 0 0 1 13 8 A5 5 0 0 1 8 13" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M8 5 A3 3 0 0 0 5 8 A3 3 0 0 0 8 11" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          OpenAI
+        </span>
+        <!-- Anthropic -->
+        <span class="pbadge" style="background:#D97706; color:#fff; border-color:#D97706;">
+          <svg width="16" height="16" viewBox="0 0 16 16">
+            <rect width="16" height="16" rx="4" fill="#D97706"/>
+            <path d="M8 3 L11.5 13 H9.5 L8 9 L6.5 13 H4.5 Z" fill="#fff"/>
+          </svg>
+          Anthropic
+        </span>
+        <!-- Meta Llama -->
+        <span class="pbadge" style="background:#0866FF; color:#fff; border-color:#0866FF;">
+          <svg width="16" height="16" viewBox="0 0 16 16">
+            <rect width="16" height="16" rx="4" fill="#0866FF"/>
+            <path d="M3 11 L3 5 L5.5 9 L8 5 L10.5 9 L13 5 L13 11" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Meta Llama
+        </span>
+        <!-- Mistral -->
+        <span class="pbadge" style="background:#FF7000; color:#fff; border-color:#FF7000;">
+          <svg width="16" height="16" viewBox="0 0 16 16">
+            <rect width="16" height="16" rx="4" fill="#FF7000"/>
+            <rect x="3" y="4" width="4" height="4" rx="1" fill="#fff"/>
+            <rect x="9" y="4" width="4" height="4" rx="1" fill="#fff"/>
+            <rect x="6" y="8" width="4" height="4" rx="1" fill="#fff"/>
+          </svg>
+          Mistral
+        </span>
+        <!-- Gemma -->
+        <span class="pbadge" style="background:#4285F4; color:#fff; border-color:#4285F4;">
+          <svg width="16" height="16" viewBox="0 0 16 16">
+            <rect width="16" height="16" rx="4" fill="#4285F4"/>
+            <path d="M8 4 A4 4 0 1 0 12 8 L9.5 8" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+            <circle cx="9.5" cy="8" r="1" fill="#fff"/>
+          </svg>
+          Gemma
+        </span>
+      </div>
     </div>
   </div>
 </section>
+
+<!-- DOCS OVERLAY -->
+<div class="docs-overlay" id="docsOverlay">
+  <div class="docs-backdrop" id="docsBackdrop"></div>
+  <div class="docs-sheet">
+    <div class="docs-sheet-head">
+      <div>
+        <div class="eyebrow" style="margin:0 0 4px;">Documentation</div>
+        <div style="font-size:18px;font-weight:800;letter-spacing:-0.02em;">HydraPoT v0.1.0</div>
+      </div>
+      <button class="docs-close" id="docsClose">✕</button>
+    </div>
+    <div class="docs-sheet-body">
+      <div class="docs-wrap">
+
+    <!-- TAB NAV -->
+    <div class="doc-tabs">
+      <button class="doc-tab active" data-tab="quickstart">Quick Start</button>
+      <button class="doc-tab" data-tab="cli">CLI Reference</button>
+      <button class="doc-tab" data-tab="arch">Architecture</button>
+      <button class="doc-tab" data-tab="fi">FI Scoring</button>
+      <button class="doc-tab" data-tab="router">Router Logic</button>
+      <button class="doc-tab" data-tab="rules">Rule Engine</button>
+      <button class="doc-tab" data-tab="config">Config &amp; Roadmap</button>
+    </div>
+
+    <!-- ── QUICK START ── -->
+    <div class="doc-panel active" id="doc-quickstart">
+      <p class="doc-p">Get a live honeypot on port 2222 in three steps. You need Docker (for Cowrie), Python 3.10+, and a GPU if you want the on-device LLM agent active.</p>
+
+      <div class="doc-steps">
+        <div class="doc-step">
+          <div class="doc-step-num">1</div>
+          <div class="doc-step-body">
+            <h4>Clone &amp; install</h4>
+            <p>Pull the repo and install Python dependencies into a virtual environment.</p>
+            <div class="doc-code"><span class="cmt"># clone</span>
+git clone https://github.com/hydrapot/hydrapot
+cd hydrapot
+
+<span class="cmt"># create venv and install</span>
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt</div>
+          </div>
+        </div>
+
+        <div class="doc-step">
+          <div class="doc-step-num">2</div>
+          <div class="doc-step-body">
+            <h4>Start Cowrie in Docker</h4>
+            <p>HydraPoT connects to a real Cowrie container via Paramiko SSH for FI 0–1 commands.</p>
+            <div class="doc-code">docker pull cowrie/cowrie
+docker run -d -p 2223:2222 --name cowrie cowrie/cowrie</div>
+          </div>
+        </div>
+
+        <div class="doc-step">
+          <div class="doc-step-num">3</div>
+          <div class="doc-step-body">
+            <h4>Initialize &amp; run</h4>
+            <p>The setup wizard detects your GPU, downloads the on-device model, and writes a config file. Then start the honeypot.</p>
+            <div class="doc-code"><span class="cmt"># first-time setup wizard</span>
+hp init
+
+<span class="cmt"># start the honeypot server</span>
+hp run
+<span class="cmt"># → Listening on 0.0.0.0:2222</span>
+<span class="cmt"># → Cowrie agent    ✓  connected</span>
+<span class="cmt"># → On-device LLM   ✓  Qwen2.5-Coder-7B loaded</span>
+<span class="cmt"># → Cloud LLM       ✓  GPT-5 ready</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-h3">Prerequisites</div>
+      <table class="doc-table">
+        <thead><tr><th>Requirement</th><th>Minimum</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Python</td><td>3.10+</td><td>3.11 recommended</td></tr>
+          <tr><td>Docker</td><td>Any recent version</td><td>Runs the Cowrie container</td></tr>
+          <tr><td>GPU VRAM</td><td>6 GB</td><td>Required for on-device LLM. CPU-only falls back to cloud.</td></tr>
+          <tr><td>Cloud API key</td><td>Optional</td><td>Only needed for FI 4 (destructive) commands</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ── CLI REFERENCE ── -->
+    <div class="doc-panel" id="doc-cli">
+      <p class="doc-p">HydraPoT ships with the <code style="font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--y-100);padding:1px 6px;border-radius:4px;">hp</code> CLI. All commands support <code style="font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--y-100);padding:1px 6px;border-radius:4px;">--help</code> for inline usage.</p>
+
+      <div class="doc-code">Usage: hp [OPTIONS] COMMAND [ARGS]...
+
+  HydraPoT — Multi-Agent SSH Honeypot
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  <span class="kw">init</span>       Run the setup wizard to configure HydraPoT.
+  <span class="kw">run</span>        Start the honeypot server.
+  <span class="kw">config</span>     Show current configuration.
+  <span class="kw">logs</span>       View recent log entries.
+  <span class="kw">dashboard</span>  Open the analytics dashboard.
+  <span class="kw">version</span>    Show HydraPoT version.</div>
+
+      <div class="doc-h3">Command details</div>
+      <table class="doc-table">
+        <thead><tr><th>Command</th><th>Description</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><code>hp init</code></td>
+            <td>Interactive setup wizard. Detects GPU, downloads the on-device model, configures Cowrie connection, and writes <code>config.yaml</code>.</td>
+            <td><code>hp init</code></td>
+          </tr>
+          <tr>
+            <td><code>hp run</code></td>
+            <td>Starts the honeypot server on the configured port (default :2222). Loads all three agents and begins the Honey Router. Streams events to stdout and SIEM if configured.</td>
+            <td><code>hp run --port 2222</code></td>
+          </tr>
+          <tr>
+            <td><code>hp config</code></td>
+            <td>Prints the current resolved configuration — active agents, model IDs, SIEM endpoint, FI thresholds, and rule files loaded.</td>
+            <td><code>hp config</code></td>
+          </tr>
+          <tr>
+            <td><code>hp logs</code></td>
+            <td>Tails <code>session_log.json</code> and <code>impactful_log.json</code>. Supports <code>--fi</code> to filter by FI level and <code>--session</code> for a specific session ID.</td>
+            <td><code>hp logs --fi 4</code></td>
+          </tr>
+          <tr>
+            <td><code>hp dashboard</code></td>
+            <td>Opens the local analytics dashboard in a browser. Shows FI distribution, agent usage, session timelines, and triggered rules.</td>
+            <td><code>hp dashboard</code></td>
+          </tr>
+          <tr>
+            <td><code>hp version</code></td>
+            <td>Prints the HydraPoT version string.</td>
+            <td><code>hp version</code></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="doc-h3">Log files</div>
+      <table class="doc-table">
+        <thead><tr><th>File</th><th>Contains</th></tr></thead>
+        <tbody>
+          <tr><td><code>session_log.json</code></td><td>Every command from every session — timestamp, raw input, FI score, agent used, response.</td></tr>
+          <tr><td><code>impactful_log.json</code></td><td>FI ≥ 2 commands only. Used for threat intel review and SIEM forwarding.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ── ARCHITECTURE ── -->
+    <div class="doc-panel" id="doc-arch">
+      <p class="doc-p">Every SSH command passes through a four-stage pipeline before a response reaches the attacker.</p>
+
+      <div class="doc-flow">
+        <div class="doc-flow-row">
+          <div class="doc-flow-spine"><div class="doc-flow-dot"></div><div class="doc-flow-line"></div></div>
+          <div class="doc-flow-body">
+            <div class="doc-flow-title">① Attacker connects — SSH :2222</div>
+            <div class="doc-flow-sub">Raw paramiko session opens. Every keystroke is captured and forwarded into the pipeline. The attacker sees a convincing Ubuntu 22.04 banner.</div>
+          </div>
+        </div>
+        <div class="doc-flow-row">
+          <div class="doc-flow-spine"><div class="doc-flow-dot"></div><div class="doc-flow-line"></div></div>
+          <div class="doc-flow-body">
+            <div class="doc-flow-title">② Honey Router — classify &amp; route</div>
+            <div class="doc-flow-sub">Checks cloud escalation conditions first (entropy, obfuscation, pipe-to-shell). Then pattern-matches for Cowrie or on-device. Fallback is always on-device. Assigns an FI score 0–4.</div>
+          </div>
+        </div>
+        <div class="doc-flow-row">
+          <div class="doc-flow-spine"><div class="doc-flow-dot"></div><div class="doc-flow-line"></div></div>
+          <div class="doc-flow-body">
+            <div class="doc-flow-title">③ FI Manager — score &amp; remember</div>
+            <div class="doc-flow-sub">Stores FI ≥ 2 commands in a capped memory buffer (max 10 events). When full, drops the lowest-retention entry using: Retention = (0.7 × FI_weight) + (0.3 × Recency_weight). High-impact commands stay in context longer.</div>
+          </div>
+        </div>
+        <div class="doc-flow-row">
+          <div class="doc-flow-spine"><div class="doc-flow-dot"></div></div>
+          <div class="doc-flow-body">
+            <div class="doc-flow-title">④ Agent responds</div>
+            <div class="doc-flow-sub">
+              <strong style="color:var(--ink);">cowrie_agent</strong> — Paramiko SSH into real Cowrie container. FI 0–1.<br>
+              <strong style="color:var(--ink);">ondevice_agent</strong> — Qwen2.5-Coder-7B locally. FI 2–3. Uses session history.<br>
+              <strong style="color:var(--ink);">cloud_agent</strong> — GPT-5 via API. FI 4 + obfuscated commands.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-h3">Session logging</div>
+      <p class="doc-p">Every command is written to <code style="font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--y-100);padding:1px 6px;border-radius:4px;">session_log.json</code>. Commands scored FI ≥ 2 are additionally written to <code style="font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--y-100);padding:1px 6px;border-radius:4px;">impactful_log.json</code> and forwarded to the SIEM endpoint if configured.</p>
+    </div>
+
+    <!-- ── FI SCORING ── -->
+    <div class="doc-panel" id="doc-fi">
+      <p class="doc-p">Every command the attacker types is classified into one of five Fidelity Impact levels. The score controls routing, logging, and memory retention.</p>
+
+      <table class="doc-table">
+        <thead>
+          <tr><th>Score</th><th>Category</th><th>Example Commands</th><th>Routed To</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="fi-pip f0">0</span></td>
+            <td>Read / Display</td>
+            <td><code>ls</code> <code>whoami</code> <code>cat</code> <code>uname</code> <code>pwd</code></td>
+            <td>Cowrie agent</td>
+          </tr>
+          <tr>
+            <td><span class="fi-pip f1">1</span></td>
+            <td>Create / Install</td>
+            <td><code>touch</code> <code>mkdir</code> <code>wget</code> <code>apt-get install</code></td>
+            <td>Cowrie agent</td>
+          </tr>
+          <tr>
+            <td><span class="fi-pip f2">2</span></td>
+            <td>Modify / Navigate</td>
+            <td><code>chmod</code> <code>rm</code> <code>cd</code> <code>echo &gt; file</code></td>
+            <td>On-device LLM</td>
+          </tr>
+          <tr>
+            <td><span class="fi-pip f3">3</span></td>
+            <td>Service / Elevate</td>
+            <td><code>sudo</code> <code>systemctl</code> <code>nmap</code> <code>curl | bash</code></td>
+            <td>On-device LLM</td>
+          </tr>
+          <tr>
+            <td><span class="fi-pip f4">4</span></td>
+            <td>Impact / Destructive</td>
+            <td><code>passwd</code> <code>rm -rf /</code> <code>useradd</code> <code>chmod 777</code></td>
+            <td>Cloud LLM (GPT-5)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="doc-h3">Memory retention formula</div>
+      <p class="doc-p">When the FI ≥ 2 buffer hits 10 events, the entry with the lowest score is evicted:</p>
+      <div class="doc-code">Retention = (<span class="num">0.7</span> × FI_weight) + (<span class="num">0.3</span> × Recency_weight)
+
+FI_weight      = fi_score / 4
+Recency_weight = 1 / (1 + age_in_minutes)
+
+<span class="cmt"># Result: high-impact, recent commands survive longest.</span>
+<span class="cmt"># Old recon (FI 0-1) is never stored — it doesn't compete.</span></div>
+
+      <div class="doc-h3">What gets logged where</div>
+      <table class="doc-table">
+        <thead><tr><th>FI Level</th><th>session_log.json</th><th>impactful_log.json</th><th>SIEM forwarded</th></tr></thead>
+        <tbody>
+          <tr><td><span class="fi-pip f0">0</span> &amp; <span class="fi-pip f1">1</span></td><td>✓</td><td>—</td><td>—</td></tr>
+          <tr><td><span class="fi-pip f2">2</span> &amp; <span class="fi-pip f3">3</span></td><td>✓</td><td>✓</td><td>If endpoint set</td></tr>
+          <tr><td><span class="fi-pip f4">4</span></td><td>✓</td><td>✓</td><td>Always (if set)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ── ROUTER LOGIC ── -->
+    <div class="doc-panel" id="doc-router">
+      <p class="doc-p">The Honey Router evaluates every command through a strict priority chain. Cloud escalation is checked <strong>first</strong> — before any pattern matching — to ensure no obfuscated payload ever leaks to a weaker agent.</p>
+
+      <div class="doc-h3">Decision order</div>
+      <table class="doc-table">
+        <thead><tr><th>Priority</th><th>Condition</th><th>Routes to</th></tr></thead>
+        <tbody>
+          <tr>
+            <td style="font-weight:700; color:var(--y-800);">1 — Cloud check</td>
+            <td>
+              Shannon entropy &gt; 4.8 <strong>AND</strong> length ≥ 90<br>
+              <em>OR</em> operator count ≥ 2<br>
+              <em>OR</em> pipe-to-shell detected (<code>| bash</code>, <code>| sh</code>)<br>
+              <em>OR</em> hex escape sequence (<code>\x41</code>…)<br>
+              <em>OR</em> base64 pattern match
+            </td>
+            <td><strong>cloud_agent</strong></td>
+          </tr>
+          <tr>
+            <td style="font-weight:700;">2 — Cowrie patterns</td>
+            <td>Basic read/display commands, file operations, package install, <code>sudo</code>, download tools (<code>wget</code>, <code>curl</code> without pipe)</td>
+            <td><strong>cowrie_agent</strong></td>
+          </tr>
+          <tr>
+            <td style="font-weight:700;">3 — On-device patterns</td>
+            <td>Script execution (<code>./</code>, <code>bash script.sh</code>), service status queries (<code>systemctl status</code>), version queries (<code>--version</code>, <code>-v</code>)</td>
+            <td><strong>ondevice_agent</strong></td>
+          </tr>
+          <tr>
+            <td style="font-weight:700; color:var(--ink-3);">4 — Fallback</td>
+            <td>Anything not matched by rules 1–3</td>
+            <td><strong>ondevice_agent</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="doc-h3">Why cloud is checked first</div>
+      <p class="doc-p">A sophisticated attacker can craft commands that look simple on the surface but contain encoded payloads. Checking entropy and structural obfuscation markers before pattern matching ensures these never slip through to Cowrie (which would return a static, unhelpful response) or the on-device LLM (which may not handle extreme obfuscation reliably).</p>
+    </div>
+
+    <!-- ── RULE ENGINE ── -->
+    <div class="doc-panel" id="doc-rules">
+      <p class="doc-p">Drop a <code style="font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--y-100);padding:1px 6px;border-radius:4px;">.yaml</code> file into the <code style="font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--y-100);padding:1px 6px;border-radius:4px;">rules/</code> directory while the honeypot is live. Rules are hot-reloaded on the next incoming command — no restart needed.</p>
+
+      <div class="doc-h3">Full rule structure</div>
+      <div class="doc-code"><span class="cmt"># rules/example.yaml</span>
+<span class="kw">- match</span>:
+    <span class="kw">command</span>:      <span class="str">"wget *.sh"</span>        <span class="cmt"># glob pattern on raw input</span>
+    <span class="kw">pattern</span>:      <span class="str">"*.sh"</span>             <span class="cmt"># secondary glob (e.g. filename)</span>
+    <span class="kw">fi_min</span>:       <span class="num">1</span>                  <span class="cmt"># only match if FI ≥ this</span>
+    <span class="kw">entropy_gt</span>:   <span class="num">4.8</span>                <span class="cmt"># only match if Shannon entropy > this</span>
+    <span class="kw">pipe_to_shell</span>: <span class="num">true</span>             <span class="cmt"># only match if | bash / | sh present</span>
+  <span class="kw">respond</span>:
+    <span class="kw">agent</span>:        <span class="str">cloud</span>              <span class="cmt"># force agent: cowrie | ondevice | cloud</span>
+    <span class="kw">template</span>:     <span class="str">fake_download</span>      <span class="cmt"># built-in response template</span>
+    <span class="kw">inject</span>:       <span class="str">"Saving to: '{{filename}}'"</span>   <span class="cmt"># inline string ({{vars}} supported)</span>
+    <span class="kw">exit_code</span>:    <span class="num">0</span>
+    <span class="kw">delay_ms</span>:     <span class="num">420</span>                <span class="cmt"># artificial latency in ms</span>
+    <span class="kw">loop</span>:         <span class="num">3</span>                  <span class="cmt"># repeat the response N times</span>
+    <span class="kw">fi_override</span>:  <span class="num">4</span>                  <span class="cmt"># override computed FI score</span>
+    <span class="kw">alert</span>:        <span class="str">"siem:critical"</span>    <span class="cmt"># fire SIEM alert on match</span></div>
+
+      <div class="doc-h3">match keys</div>
+      <table class="doc-table">
+        <thead><tr><th>Key</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>command</code></td><td>glob string</td><td>Glob pattern matched against the full raw command string.</td></tr>
+          <tr><td><code>pattern</code></td><td>glob string</td><td>Secondary glob — useful for matching filenames or arguments within a command.</td></tr>
+          <tr><td><code>fi_min</code></td><td>integer 0–4</td><td>Rule only fires if the computed FI score is ≥ this value.</td></tr>
+          <tr><td><code>entropy_gt</code></td><td>float</td><td>Rule only fires if Shannon entropy of the command exceeds this threshold.</td></tr>
+          <tr><td><code>pipe_to_shell</code></td><td>boolean</td><td>Rule only fires if the command contains a pipe into a shell (<code>| bash</code>, <code>| sh</code>).</td></tr>
+        </tbody>
+      </table>
+
+      <div class="doc-h3">respond keys</div>
+      <table class="doc-table">
+        <thead><tr><th>Key</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>agent</code></td><td>cowrie · ondevice · cloud</td><td>Force a specific agent, bypassing the router entirely for this match.</td></tr>
+          <tr><td><code>template</code></td><td>string</td><td>Name of a built-in response template (e.g. <code>fake_download</code>, <code>fake_sudo_prompt</code>).</td></tr>
+          <tr><td><code>inject</code></td><td>string</td><td>Literal string injected verbatim. Supports <code>&#123;&#123;filename&#125;&#125;</code>, <code>&#123;&#123;ip&#125;&#125;</code>, <code>&#123;&#123;user&#125;&#125;</code> variables.</td></tr>
+          <tr><td><code>exit_code</code></td><td>integer</td><td>Sets the shell exit code returned after the response.</td></tr>
+          <tr><td><code>delay_ms</code></td><td>integer</td><td>Adds realistic latency before the response is sent.</td></tr>
+          <tr><td><code>loop</code></td><td>integer</td><td>Repeats the response N times — useful for fake password-prompt loops.</td></tr>
+          <tr><td><code>fi_override</code></td><td>integer 0–4</td><td>Overrides the computed FI score for this command's memory and logging treatment.</td></tr>
+          <tr><td><code>alert</code></td><td>string</td><td>Tags the SIEM event with a custom severity label on match.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ── CONFIG & ROADMAP ── -->
+    <div class="doc-panel" id="doc-config">
+      <div class="doc-h3">Environment variables</div>
+      <table class="doc-table">
+        <thead><tr><th>Variable</th><th>Default</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><code>ONDEVICE_MODEL</code></td>
+            <td><code>Qwen/Qwen2.5-Coder-7B-Instruct-GGUF</code></td>
+            <td>HuggingFace model ID or local path. Swap to any compatible checkpoint — session state and FI routing wire up automatically.</td>
+          </tr>
+          <tr>
+            <td><code>HYDRAPOT_SIEM_ENDPOINT</code></td>
+            <td>—</td>
+            <td>Webhook URL for structured JSON event forwarding. Compatible with Splunk HEC, Elastic Logstash, Graylog, or any custom endpoint.</td>
+          </tr>
+          <tr>
+            <td><code>CLOUD_API_KEY</code></td>
+            <td>—</td>
+            <td>API key for the cloud LLM. Required to handle FI 4 (destructive) and obfuscated commands. Without this, cloud-routed commands fall back to on-device.</td>
+          </tr>
+          <tr>
+            <td><code>CLOUD_API_URL</code></td>
+            <td><code>https://api.openai.com/v1</code></td>
+            <td>Cloud LLM endpoint. Accepts any OpenAI-compatible URL — point it at your own hosted model if needed.</td>
+          </tr>
+          <tr>
+            <td><code>HONEYPOT_PORT</code></td>
+            <td><code>2222</code></td>
+            <td>SSH port the honeypot listens on.</td>
+          </tr>
+          <tr>
+            <td><code>RULES_DIR</code></td>
+            <td><code>./rules</code></td>
+            <td>Directory HydraPoT watches for YAML rule files. Hot-reloaded on every new command.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="doc-h3">Tech stack</div>
+      <table class="doc-table">
+        <thead><tr><th>Component</th><th>Technology</th></tr></thead>
+        <tbody>
+          <tr><td>SSH honeypot base</td><td>Cowrie in Docker</td></tr>
+          <tr><td>On-device LLM</td><td>Qwen2.5-Coder-7B-Instruct-GGUF (swappable)</td></tr>
+          <tr><td>Cloud LLM</td><td>GPT-5 via API (OpenAI-compatible)</td></tr>
+          <tr><td>SSH transport</td><td>Paramiko</td></tr>
+          <tr><td>Language</td><td>Python 3.10+</td></tr>
+          <tr><td>Session logs</td><td>JSON — <code>session_log.json</code>, <code>impactful_log.json</code></td></tr>
+        </tbody>
+      </table>
+
+      <div class="doc-h3">Known limitations</div>
+      <div class="doc-limit-grid">
+        <div class="doc-limit-card">
+          <h4>Cowrie filesystem</h4>
+          <p>The fake filesystem inside Cowrie doesn't persist between individual commands in a session. Files "created" in one command won't appear in a subsequent ls.</p>
+        </div>
+        <div class="doc-limit-card">
+          <h4>bash_history sync</h4>
+          <p>History sync between agents has limitations — the on-device LLM carries session context, but Cowrie's own history is not shared back.</p>
+        </div>
+        <div class="doc-limit-card">
+          <h4>Token estimation</h4>
+          <p>Context window token counting uses a 4 chars/token approximation. Actual token counts may vary per model.</p>
+        </div>
+        <div class="doc-limit-card">
+          <h4>Hybrid routing</h4>
+          <p>Cowrie + on-device collaboration for FI 2–3 (where Cowrie handles static parts and LLM handles dynamic) is not yet implemented.</p>
+        </div>
+      </div>
+
+      <div class="doc-h3">Roadmap — v0.23.0-Beta</div>
+      <div>
+        <div class="doc-road-item">
+          <span class="doc-road-tag">v0.23.0</span>
+          <span class="doc-road-text"><strong>Context-aware hybrid routing for FI 2–3.</strong> Cowrie handles static shell responses; on-device LLM takes over for commands that require session context. Reduces LLM load further without sacrificing believability.</span>
+        </div>
+        <div class="doc-road-item">
+          <span class="doc-road-tag">v0.23.0</span>
+          <span class="doc-road-text"><strong>SQLite migration.</strong> Replace flat JSON log files with a proper SQLite database for faster querying, filtering by FI level, and session replay.</span>
+        </div>
+        <div class="doc-road-item">
+          <span class="doc-road-tag">v0.23.0</span>
+          <span class="doc-road-text"><strong>Improved on-device realism for FI 2–3.</strong> Fine-tuning and prompt engineering improvements to close the realism gap between on-device and cloud responses for complex commands.</span>
+        </div>
+        <div class="doc-road-item">
+          <span class="doc-road-tag">future</span>
+          <span class="doc-road-text"><strong>Real attacker session validation.</strong> Live deployment data to validate routing decisions and response quality against genuine attack patterns in the wild.</span>
+        </div>
+      </div>
+    </div>
+
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- CTA -->
 <section>
   <div class="cta-box" data-reveal="scale">
     <div class="eyebrow">Get started</div>
     <h2>Spin up the trap.</h2>
-    <p>Clone, point your venv at Qwen, and let attackers chase ghosts on port 2222.</p>
-    <pre style="background: var(--ink); color: var(--y-300); padding: 20px 28px; border-radius: 12px; font-family: 'JetBrains Mono', monospace; font-size: 14px; display: inline-block; text-align: left; margin-bottom: 32px;">$ source honeypot_new/bin/activate
-$ cd /mnt/data-partition/honeypot
+    <p>Deploy in minutes. Attackers get a convincing Linux box. You get structured threat intelligence.</p>
+    <pre style="background: var(--ink); color: var(--y-300); padding: 20px 28px; border-radius: 12px; font-family: 'JetBrains Mono', monospace; font-size: 14px; display: inline-block; text-align: left; margin-bottom: 32px;">$ git clone https://github.com/hydrapot/hydrapot
+$ pip install -r requirements.txt
 $ python main.py</pre>
     <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-      <a href="#" class="btn-primary" style="background: var(--ink); color: var(--y-300);">Read the docs →</a>
+      <a href="#" id="docsCtaBtn" class="btn-primary" style="background: var(--ink); color: var(--y-300);">Read the docs →</a>
       <a href="#" class="btn-secondary">Start on GitHub</a>
     </div>
   </div>
@@ -1294,9 +2189,9 @@ $ python main.py</pre>
     <div class="footer-brand">
       <div class="logo" style="color: var(--paper);">
         <div class="logo-mark">H</div>
-        hydraPOT
+        HydraPoT
       </div>
-      <p>A multi-agent SSH honeypot that turns every intruder into a research subject. Built for fun, evaluation, and one professor's machine.</p>
+      <p>A multi-agent SSH honeypot that turns every intruder into a research subject. Built for security teams that need more than static rule files and fake shell output.</p>
     </div>
     <div>
       <h4>System</h4>
@@ -1321,7 +2216,7 @@ $ python main.py</pre>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 hydraPOT · MIT License</span>
+    <span>© 2026 HydraPoT · MIT License</span>
     <span class="mono">v0.1.0 · port :2222</span>
   </div>
 </footer>
@@ -1378,6 +2273,22 @@ $ python main.py</pre>
         });
       }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
       els.forEach(function(el) { io.observe(el); });
+    }
+
+    // stagger-reveal: trigger children one by one on scroll
+    var staggerEls = document.querySelectorAll('.stagger-reveal');
+    if ('IntersectionObserver' in window) {
+      var sio = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            sio.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      staggerEls.forEach(function(el) { sio.observe(el); });
+    } else {
+      staggerEls.forEach(function(el) { el.classList.add('is-visible'); });
     }
 
     // ===== SQUID INTERACTION =====
@@ -1510,7 +2421,7 @@ $ python main.py</pre>
     var sequence = [
       { type: 'ssh',    text: 'ssh root@victim -p 2222' },
       { type: 'out',    text: 'Welcome to Ubuntu 22.04.3 LTS' },
-      { type: 'out',    text: 'Last login: Sat May 16 04:12:47 2026' },
+      { type: 'out',    text: 'Last login: Mon Jan 20 03:41:09 2025 from 192.168.1.1' },
       { type: 'br' },
       { type: 'cmd',    text: 'whoami',          fi: 'FI 0' },
       { type: 'out',    text: 'root' },
@@ -1676,6 +2587,46 @@ $ python main.py</pre>
     }
 
     runSequence();
+  })();
+
+  // ===== DOCS OVERLAY =====
+  (function() {
+    var overlay  = document.getElementById('docsOverlay');
+    var backdrop = document.getElementById('docsBackdrop');
+    var closeBtn = document.getElementById('docsClose');
+    var navBtn   = document.getElementById('docsNavBtn');
+    var ctaBtn   = document.getElementById('docsCtaBtn');
+
+    function openDocs(e) {
+      e.preventDefault();
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDocs() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    if (navBtn)   navBtn.addEventListener('click', openDocs);
+    if (ctaBtn)   ctaBtn.addEventListener('click', openDocs);
+    if (closeBtn) closeBtn.addEventListener('click', closeDocs);
+    if (backdrop) backdrop.addEventListener('click', closeDocs);
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeDocs();
+    });
+
+    // Tab switching
+    var tabs   = overlay.querySelectorAll('.doc-tab');
+    var panels = overlay.querySelectorAll('.doc-panel');
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        tabs.forEach(function(t)   { t.classList.remove('active'); });
+        panels.forEach(function(p) { p.classList.remove('active'); });
+        this.classList.add('active');
+        var panel = document.getElementById('doc-' + this.dataset.tab);
+        if (panel) panel.classList.add('active');
+      });
+    });
   })();
 
   // ===== HERO H1 TYPEWRITER =====

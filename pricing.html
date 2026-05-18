@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pricing — HydraPOT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --y-50:  #FFFBEB;
+    --y-100: #FEF3C7;
+    --y-200: #FDE68A;
+    --y-300: #FCD34D;
+    --y-400: #FBBF24;
+    --y-500: #F59E0B;
+    --y-600: #D97706;
+    --y-700: #B45309;
+    --y-800: #92400E;
+    --y-900: #78350F;
+    --ink:   #1A1410;
+    --ink-2: #3A2E20;
+    --ink-3: #6B5A45;
+    --paper: #FFFCF2;
+    --line:  rgba(180, 83, 9, 0.18);
+    --line-strong: rgba(180, 83, 9, 0.35);
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(252, 211, 77, 0.25) 0%, transparent 40%),
+      radial-gradient(circle at 85% 70%, rgba(251, 191, 36, 0.18) 0%, transparent 45%);
+  }
+
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(255, 252, 242, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .logo-mark {
+    width: 32px; height: 32px;
+    background: var(--y-400);
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    color: var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    transform: rotate(-6deg);
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--ink-2);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--y-700); }
+  .nav-links a.active { color: var(--y-700); font-weight: 700; }
+  .nav-cta {
+    background: var(--ink);
+    color: var(--y-300);
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid var(--ink);
+    transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--y-400); color: var(--ink); }
+
+  /* ===== SHARED ===== */
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--y-700);
+    margin-bottom: 16px;
+  }
+  h2 {
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+    margin-bottom: 16px;
+  }
+
+  /* ===== SCROLL REVEAL ===== */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+  [data-reveal="left"]  { transform: translateX(-40px); }
+  [data-reveal="right"] { transform: translateX(40px); }
+  [data-reveal="scale"] { transform: scale(0.92); }
+  [data-reveal].is-visible { opacity: 1; transform: translate(0,0) scale(1); }
+  [data-delay="100"] { transition-delay: 0.1s; }
+  [data-delay="200"] { transition-delay: 0.2s; }
+  [data-delay="300"] { transition-delay: 0.3s; }
+  [data-delay="400"] { transition-delay: 0.4s; }
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+  }
+
+  /* ===== HERO ===== */
+  .pricing-hero {
+    padding: 140px 32px 72px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .pricing-hero h1 {
+    font-size: clamp(44px, 7vw, 80px);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    font-weight: 800;
+    margin-bottom: 20px;
+  }
+  .pricing-hero h1 .accent {
+    background: linear-gradient(180deg, transparent 60%, var(--y-300) 60%);
+    padding: 0 4px;
+  }
+  .pricing-hero .sub {
+    font-size: 19px;
+    color: var(--ink-3);
+    margin-bottom: 48px;
+    line-height: 1.6;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ===== TOGGLE ===== */
+  .toggle-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--y-100);
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    padding: 6px 8px;
+    position: relative;
+  }
+  .toggle-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink-2);
+    padding: 6px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: color 0.2s;
+    user-select: none;
+    position: relative;
+    z-index: 1;
+  }
+  .toggle-label.active { color: var(--ink); }
+  .toggle-pill {
+    position: absolute;
+    top: 6px;
+    height: calc(100% - 12px);
+    background: var(--y-400);
+    border-radius: 999px;
+    border: 1.5px solid var(--ink);
+    transition: left 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 0;
+  }
+  .save-badge {
+    display: inline-flex;
+    align-items: center;
+    background: var(--ink);
+    color: var(--y-300);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 999px;
+    margin-left: 4px;
+    letter-spacing: 0.03em;
+    transition: opacity 0.3s;
+  }
+  .save-badge.hidden { opacity: 0; pointer-events: none; }
+
+  /* ===== PRICING GRID ===== */
+  .pricing-section {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 32px 100px;
+  }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    align-items: start;
+    margin-top: 60px;
+  }
+  .plan-card {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 24px;
+    padding: 36px 32px;
+    position: relative;
+    transition: transform 0.3s;
+  }
+  .plan-card:hover { transform: translateY(-6px); }
+  .plan-card.popular {
+    background: var(--ink);
+    color: var(--paper);
+    box-shadow: 10px 10px 0 var(--y-400), 10px 10px 0 1px var(--ink);
+    transform: translateY(-8px);
+  }
+  .plan-card.popular:hover { transform: translateY(-14px); }
+  .popular-tag {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--y-400);
+    color: var(--ink);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 16px;
+    border-radius: 999px;
+    border: 2px solid var(--ink);
+    white-space: nowrap;
+  }
+  .plan-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--y-700);
+    margin-bottom: 12px;
+  }
+  .plan-card.popular .plan-name { color: var(--y-300); }
+  .plan-price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: 4px;
+    min-height: 70px;
+  }
+  .price-currency {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ink-2);
+    margin-top: 12px;
+  }
+  .plan-card.popular .price-currency { color: rgba(255,252,242,0.7); }
+  .price-amount {
+    font-size: 64px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .plan-card.popular .price-amount { color: var(--y-300); }
+  .price-per {
+    font-size: 14px;
+    color: var(--ink-3);
+    font-weight: 500;
+  }
+  .plan-card.popular .price-per { color: rgba(255,252,242,0.5); }
+  .price-original {
+    font-size: 13px;
+    color: var(--ink-3);
+    text-decoration: line-through;
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 8px;
+    min-height: 20px;
+    transition: opacity 0.3s;
+  }
+  .plan-card.popular .price-original { color: rgba(255,252,242,0.35); }
+  .plan-desc {
+    font-size: 14px;
+    color: var(--ink-3);
+    line-height: 1.55;
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--line);
+  }
+  .plan-card.popular .plan-desc {
+    color: rgba(255,252,242,0.55);
+    border-bottom-color: rgba(255,252,242,0.12);
+  }
+  .plan-features {
+    list-style: none;
+    margin-bottom: 32px;
+  }
+  .plan-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--ink-2);
+    padding: 7px 0;
+  }
+  .plan-card.popular .plan-features li { color: rgba(255,252,242,0.8); }
+  .plan-features li .check {
+    flex-shrink: 0;
+    width: 18px; height: 18px;
+    background: var(--y-300);
+    border: 1.5px solid var(--ink);
+    border-radius: 5px;
+    display: grid;
+    place-items: center;
+    font-size: 10px;
+    font-weight: 900;
+    margin-top: 1px;
+    color: var(--ink);
+  }
+  .plan-card.popular .plan-features li .check {
+    background: var(--y-400);
+    border-color: var(--y-400);
+    color: var(--ink);
+  }
+  .plan-features li .dash {
+    flex-shrink: 0;
+    width: 18px; height: 18px;
+    display: grid;
+    place-items: center;
+    font-size: 14px;
+    color: var(--ink-3);
+    margin-top: 1px;
+  }
+  .plan-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 14px 20px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    border: 2px solid var(--ink);
+    transition: transform 0.2s, background 0.2s, color 0.2s;
+    cursor: pointer;
+  }
+  .plan-btn-outline {
+    background: transparent;
+    color: var(--ink);
+  }
+  .plan-btn-outline:hover { background: var(--y-100); transform: translateY(-2px); }
+  .plan-btn-solid {
+    background: var(--y-400);
+    color: var(--ink);
+    border-color: var(--y-400);
+  }
+  .plan-btn-solid:hover { background: var(--y-300); transform: translateY(-2px); }
+  .plan-btn-dark {
+    background: var(--paper);
+    color: var(--ink);
+    border-color: var(--paper);
+  }
+  .plan-btn-dark:hover { background: var(--y-300); border-color: var(--y-300); transform: translateY(-2px); }
+
+  /* ===== FEATURE TABLE ===== */
+  .compare-section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 32px 100px;
+  }
+  .compare-section .section-head {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid var(--ink);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .compare-table thead th {
+    padding: 20px 24px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    background: var(--y-100);
+    border-bottom: 2px solid var(--ink);
+  }
+  .compare-table thead th:first-child { text-align: left; background: var(--y-200); }
+  .compare-table thead th.popular-col {
+    background: var(--ink);
+    color: var(--y-300);
+  }
+  .compare-table tbody tr:nth-child(odd) td { background: var(--paper); }
+  .compare-table tbody tr:nth-child(even) td { background: var(--y-50); }
+  .compare-table tbody tr:nth-child(odd) td.popular-col { background: rgba(26,20,16,0.06); }
+  .compare-table tbody tr:nth-child(even) td.popular-col { background: rgba(26,20,16,0.10); }
+  .compare-table tbody td {
+    padding: 14px 24px;
+    font-size: 13px;
+    color: var(--ink-2);
+    text-align: center;
+    border-top: 1px solid var(--line);
+  }
+  .compare-table tbody td:first-child { text-align: left; font-weight: 500; color: var(--ink); }
+  .compare-table tbody td.popular-col { font-weight: 600; color: var(--ink); }
+  .tcheck { color: var(--y-700); font-weight: 900; font-size: 15px; }
+  .tdash  { color: var(--ink-3); font-size: 18px; }
+  .tgroup td {
+    background: var(--y-200) !important;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--y-800);
+    padding: 8px 24px;
+  }
+
+  /* ===== FAQ ===== */
+  .faq-section {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 32px 100px;
+  }
+  .faq-section .section-head {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .faq-item {
+    border-top: 1px solid var(--line);
+    padding: 20px 0;
+  }
+  .faq-item:last-child { border-bottom: 1px solid var(--line); }
+  .faq-q {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    gap: 16px;
+  }
+  .faq-icon {
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    background: var(--y-200);
+    border: 1.5px solid var(--ink);
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    font-size: 16px;
+    font-weight: 700;
+    transition: transform 0.3s, background 0.2s;
+  }
+  .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--y-400); }
+  .faq-a {
+    font-size: 14px;
+    color: var(--ink-3);
+    line-height: 1.7;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), margin-top 0.3s;
+  }
+  .faq-item.open .faq-a { max-height: 300px; margin-top: 14px; }
+
+  /* ===== CTA ===== */
+  .cta-wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 32px 80px;
+  }
+  .cta-box {
+    background: var(--y-300);
+    border: 2px solid var(--ink);
+    border-radius: 32px;
+    padding: 72px 48px;
+    text-align: center;
+    box-shadow: 12px 12px 0 var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-box h2 { font-size: clamp(36px, 5vw, 56px); margin-bottom: 16px; }
+  .cta-box p { font-size: 18px; color: var(--ink-2); margin-bottom: 32px; max-width: 540px; margin-left: auto; margin-right: auto; }
+  .btn-primary {
+    background: var(--ink); color: var(--y-300);
+    padding: 16px 28px; border-radius: 999px;
+    font-size: 15px; font-weight: 600;
+    text-decoration: none; display: inline-flex;
+    align-items: center; gap: 8px;
+    border: 2px solid var(--ink); transition: transform 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); }
+  .btn-secondary {
+    background: transparent; color: var(--ink);
+    padding: 14px 26px; border-radius: 999px;
+    font-size: 15px; font-weight: 600;
+    text-decoration: none; display: inline-flex;
+    align-items: center; gap: 8px;
+    border: 2px solid var(--ink);
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 60px 32px 32px;
+    margin-top: 80px;
+  }
+  .footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+  footer h4 {
+    color: var(--y-400);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 16px;
+  }
+  footer a {
+    display: block;
+    color: rgba(255,252,242,0.6);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 4px 0;
+    transition: color 0.2s;
+  }
+  footer a:hover { color: var(--y-300); }
+  .footer-brand p {
+    font-size: 14px;
+    color: rgba(255,252,242,0.5);
+    margin-top: 12px;
+    max-width: 320px;
+    line-height: 1.6;
+  }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,252,242,0.1);
+    padding-top: 24px;
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    color: rgba(255,252,242,0.4);
+    font-size: 13px;
+  }
+
+  /* ===== SQUID ===== */
+  .squid {
+    position: fixed;
+    bottom: 32px; right: 32px;
+    width: 120px; height: 140px;
+    z-index: 90;
+    pointer-events: none;
+    transition: transform 0.15s ease-out;
+  }
+  .squid-inner {
+    width: 100%; height: 100%;
+    transform-origin: center 30%;
+    animation: squidFloat 3s ease-in-out infinite;
+  }
+  @keyframes squidFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(2deg); }
+  }
+  .squid-body { fill: var(--y-400); stroke: var(--ink); stroke-width: 3; }
+  .squid-eye { fill: var(--ink); }
+  .squid-eye-shine { fill: var(--paper); }
+  .squid-tentacle-fill { fill: var(--y-400); stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; }
+  .squid-bubble {
+    position: absolute; z-index: 10;
+    background: var(--paper); border: 2px solid var(--ink);
+    border-radius: 16px; padding: 8px 14px;
+    font-size: 12px; font-weight: 600; color: var(--ink);
+    bottom: 148px; right: 50%;
+    transform: translateX(50%) scale(0);
+    transform-origin: bottom center;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    white-space: nowrap; box-shadow: 3px 3px 0 var(--ink);
+    pointer-events: none;
+  }
+  .squid-bubble.show { transform: translateX(50%) scale(1); }
+  .squid-bubble:after {
+    content: ""; position: absolute;
+    bottom: -8px; left: 50%; transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid var(--ink);
+  }
+  @media (max-width: 540px) { .squid { width: 80px; height: 100px; bottom: 16px; right: 16px; } }
+  @media (prefers-reduced-motion: reduce) { .squid-inner { animation: none; } }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .pricing-grid { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; }
+    .plan-card.popular { transform: none; }
+    .plan-card.popular:hover { transform: translateY(-6px); }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+    .compare-table { display: none; }
+  }
+  @media (max-width: 540px) {
+    .footer-inner { grid-template-columns: 1fr; }
+    .cta-box { padding: 48px 24px; box-shadow: 6px 6px 0 var(--ink); }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="page.html" class="logo">
+      <div class="logo-mark">H</div>
+      HydraPoT
+    </a>
+    <ul class="nav-links">
+      <li><a href="page.html#architecture">Architecture</a></li>
+      <li><a href="page.html#agents">Agents</a></li>
+      <li><a href="page.html#fi">FI Scoring</a></li>
+      <li><a href="page.html#rules">Rule Engine</a></li>
+      <li><a href="page.html#integrations">Integrations</a></li>
+      <li><a href="pricing.html" class="active">Pricing</a></li>
+    </ul>
+    <a href="#" class="nav-cta">Deploy →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="pricing-hero" data-reveal>
+  <div class="eyebrow">Pricing</div>
+  <h1>Pay for traps,<br>not <span class="accent">overhead.</span></h1>
+  <p class="sub">Start free. Upgrade when attackers get interesting. No per-seat fees, no vendor lock-in on your LLM.</p>
+
+  <!-- BILLING TOGGLE -->
+  <div style="display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap;">
+    <div class="toggle-wrap" id="billingToggle">
+      <div class="toggle-pill" id="togglePill"></div>
+      <span class="toggle-label active" id="lblMonthly" data-mode="monthly">Monthly</span>
+      <span class="toggle-label" id="lblYearly" data-mode="yearly">Yearly</span>
+    </div>
+    <span class="save-badge hidden" id="saveBadge">Save 20%</span>
+  </div>
+</div>
+
+<!-- PRICING CARDS -->
+<div class="pricing-section">
+  <div class="pricing-grid" id="pricingGrid">
+
+    <!-- SCOUT -->
+    <div class="plan-card" data-reveal data-delay="100">
+      <div class="plan-name">Scout</div>
+      <div class="price-original" id="scoutOrig">&nbsp;</div>
+      <div class="plan-price">
+        <span class="price-currency">$</span>
+        <span class="price-amount" id="scoutPrice">0</span>
+        <span class="price-per">/mo</span>
+      </div>
+      <div class="plan-desc">Single-node honeypot with Cowrie and community rules. No credit card needed.</div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> 1 honeypot node</li>
+        <li><span class="check">✓</span> Cowrie agent only</li>
+        <li><span class="check">✓</span> Community rule library</li>
+        <li><span class="check">✓</span> 30-day log retention</li>
+        <li><span class="check">✓</span> stdout JSONL export</li>
+        <li><span class="dash">–</span> On-device LLM agent</li>
+        <li><span class="dash">–</span> Cloud LLM fallback</li>
+        <li><span class="dash">–</span> SIEM webhook</li>
+        <li><span class="dash">–</span> Custom rules</li>
+      </ul>
+      <a href="#" class="plan-btn plan-btn-outline">Get started free</a>
+    </div>
+
+    <!-- SENTINEL (popular) -->
+    <div class="plan-card popular" data-reveal data-delay="200">
+      <div class="popular-tag">Most popular</div>
+      <div class="plan-name">Sentinel</div>
+      <div class="price-original" id="sentinelOrig">&nbsp;</div>
+      <div class="plan-price">
+        <span class="price-currency">$</span>
+        <span class="price-amount" id="sentinelPrice">29</span>
+        <span class="price-per">/mo</span>
+      </div>
+      <div class="plan-desc">On-device LLM, custom rules, and SIEM integration. For teams running real honeypots in production.</div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> Up to 10 honeypot nodes</li>
+        <li><span class="check">✓</span> Cowrie + on-device LLM</li>
+        <li><span class="check">✓</span> Custom YAML rules</li>
+        <li><span class="check">✓</span> 90-day log retention</li>
+        <li><span class="check">✓</span> SIEM webhook (Splunk/Elastic)</li>
+        <li><span class="check">✓</span> Hot-reload rules</li>
+        <li><span class="check">✓</span> BYO HuggingFace model</li>
+        <li><span class="dash">–</span> Cloud LLM fallback</li>
+        <li><span class="dash">–</span> Priority support</li>
+      </ul>
+      <a href="#" class="plan-btn plan-btn-dark">Start Sentinel →</a>
+    </div>
+
+    <!-- HUNTER -->
+    <div class="plan-card" data-reveal data-delay="300">
+      <div class="plan-name">Hunter</div>
+      <div class="price-original" id="hunterOrig">&nbsp;</div>
+      <div class="plan-price">
+        <span class="price-currency">$</span>
+        <span class="price-amount" id="hunterPrice">99</span>
+        <span class="price-per">/mo</span>
+      </div>
+      <div class="plan-desc">Full three-agent system with cloud LLM fallback, unlimited nodes, and SOC-grade retention.</div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> Unlimited honeypot nodes</li>
+        <li><span class="check">✓</span> All three agents active</li>
+        <li><span class="check">✓</span> Cloud LLM fallback (Llama 3.1)</li>
+        <li><span class="check">✓</span> Unlimited custom rules</li>
+        <li><span class="check">✓</span> 365-day log retention</li>
+        <li><span class="check">✓</span> SIEM + SOC integration</li>
+        <li><span class="check">✓</span> FI analytics dashboard</li>
+        <li><span class="check">✓</span> BYO cloud LLM endpoint</li>
+        <li><span class="check">✓</span> Priority email support</li>
+      </ul>
+      <a href="#" class="plan-btn plan-btn-outline">Start Hunter →</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- COMPARISON TABLE -->
+<div class="compare-section">
+  <div class="section-head" data-reveal>
+    <div class="eyebrow">Compare plans</div>
+    <h2>Everything side by side.</h2>
+  </div>
+
+  <table class="compare-table" data-reveal>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Scout</th>
+        <th class="popular-col">Sentinel</th>
+        <th>Hunter</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="tgroup"><td colspan="4">Infrastructure</td></tr>
+      <tr>
+        <td>Honeypot nodes</td>
+        <td>1</td>
+        <td class="popular-col">Up to 10</td>
+        <td>Unlimited</td>
+      </tr>
+      <tr>
+        <td>Log retention</td>
+        <td>30 days</td>
+        <td class="popular-col">90 days</td>
+        <td>365 days</td>
+      </tr>
+      <tr>
+        <td>SSH port</td>
+        <td>:2222 only</td>
+        <td class="popular-col">Any port</td>
+        <td>Any port</td>
+      </tr>
+
+      <tr class="tgroup"><td colspan="4">Agents</td></tr>
+      <tr>
+        <td>Cowrie agent</td>
+        <td><span class="tcheck">✓</span></td>
+        <td class="popular-col"><span class="tcheck">✓</span></td>
+        <td><span class="tcheck">✓</span></td>
+      </tr>
+      <tr>
+        <td>On-device LLM agent</td>
+        <td><span class="tdash">–</span></td>
+        <td class="popular-col"><span class="tcheck">✓</span></td>
+        <td><span class="tcheck">✓</span></td>
+      </tr>
+      <tr>
+        <td>Cloud LLM fallback</td>
+        <td><span class="tdash">–</span></td>
+        <td class="popular-col"><span class="tdash">–</span></td>
+        <td><span class="tcheck">✓</span></td>
+      </tr>
+      <tr>
+        <td>BYO HuggingFace model</td>
+        <td><span class="tdash">–</span></td>
+        <td class="popular-col"><span class="tcheck">✓</span></td>
+        <td><span class="tcheck">✓</span></td>
+      </tr>
+      <tr>
+        <td>BYO cloud LLM endpoint</td>
+        <td><span class="tdash">–</span></td>
+        <td class="popular-col"><span class="tdash">–</span></td>
+        <td><span class="tcheck">✓</span></td>
+      </tr>
+
+      <tr class="tgroup"><td colspan="4">Rules &amp; Detection</td></tr>
+      <tr>
+        <td>Community rules</td>
+        <td><span class="tcheck">✓</span></td>
+        <td class="popular-col"><span class="tcheck">✓</span></td>
+        <td><span class="tcheck">✓</span></td>
+      </tr>
+      <tr>
+        <td>Custom YAML rules</td>
+        <td><span class="tdash">–</span></td>
+        <td class="popular-col">Up to 50</td>
+        <td>Unlimited</td>
+      </tr>
+      <tr>
+        <td>Hot-reload rules</td>
+        <td><span class="tdash">–</span></td>
+        <td class="popular-col"><span class="tcheck">✓</span></td>
+        <td><span class="tcheck">✓</span></td>
+      </tr>
+      <tr>
+        <td>FI weight override</td>
+        <td><span class="tdash">–</span></td>
+        <td class="popular-col"><span class="tcheck">✓</span></td>
+        <td><span class="tcheck">✓</span></td>
+      </tr>
+
+      <tr class="tgroup"><td colspan="4">Integrations</td></tr>
+      <tr>
+        <td>stdout JSONL export</td>
+        <td><span class="tcheck">✓</span></td>
+        <td class="popular-col"><span class="tcheck">✓</span></td>
+        <td><span class="tcheck">✓</span></td>
+      </tr>
+      <tr>
+        <td>SIEM webhook</td>
+        <td><span class="tdash">–</span></td>
+        <td class="popular-col"><span class="tcheck">✓</span></td>
+        <td><span class="tcheck">✓</span></td>
+      </tr>
+      <tr>
+        <td>FI analytics dashboard</td>
+        <td><span class="tdash">–</span></td>
+        <td class="popular-col"><span class="tdash">–</span></td>
+        <td><span class="tcheck">✓</span></td>
+      </tr>
+      <tr>
+        <td>Support</td>
+        <td>Community</td>
+        <td class="popular-col">Email</td>
+        <td>Priority email</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- FAQ -->
+<div class="faq-section">
+  <div class="section-head" data-reveal>
+    <div class="eyebrow">FAQ</div>
+    <h2>Common questions.</h2>
+  </div>
+
+  <div data-reveal>
+    <div class="faq-item">
+      <div class="faq-q">
+        <span>Can I switch between monthly and yearly at any time?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Yes. You can switch billing cycles any time. When upgrading to yearly, you'll be credited for unused monthly days. Downgrading to monthly takes effect at the next renewal date.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">
+        <span>What counts as a "honeypot node"?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">One running instance of <code style="font-family:'JetBrains Mono',monospace; font-size:13px;">main.py</code> listening on a port. You can run multiple nodes on the same machine or across different servers — each process counts as one node.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">
+        <span>Do I have to use your cloud LLM, or can I bring my own?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Sentinel lets you swap any HuggingFace checkpoint into the on-device agent via <code style="font-family:'JetBrains Mono',monospace; font-size:13px;">ONDEVICE_MODEL=</code>. Hunter adds <code style="font-family:'JetBrains Mono',monospace; font-size:13px;">CLOUD_API_URL=</code> so you can point the fallback at your own Novita endpoint, Ollama instance, or any OpenAI-compatible API.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">
+        <span>Is there a trial for paid plans?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Yes — both Sentinel and Hunter come with a 14-day free trial. No credit card required at sign-up. If you cancel before day 14, you owe nothing.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">
+        <span>What happens to my logs if I cancel?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">You have 30 days after cancellation to export your logs in JSONL or CSV. After that, data is purged from our servers. Scout logs live entirely on your own machine, so nothing is ever stored by us.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">
+        <span>Is HydraPoT legal to run?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Honeypots are legal in most jurisdictions when run on infrastructure you own or control. You are responsible for complying with local laws. We recommend placing the honeypot on an isolated VLAN and notifying your network admin before deployment.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-wrap">
+  <div class="cta-box" data-reveal="scale">
+    <div class="eyebrow">Get started</div>
+    <h2>Your first trap is free.</h2>
+    <p>Clone the repo, fire up Cowrie, and watch the logs fill up. Upgrade when you need the LLMs.</p>
+    <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+      <a href="#" class="btn-primary" style="background:var(--ink); color:var(--y-300);">Start for free →</a>
+      <a href="#" class="btn-secondary">View docs</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo" style="color:var(--paper);">
+        <div class="logo-mark">H</div>
+        HydraPoT
+      </div>
+      <p>A multi-agent SSH honeypot that turns every intruder into a research subject. Built for security teams that need more than static rule files and fake shell output.</p>
+    </div>
+    <div>
+      <h4>System</h4>
+      <a href="page.html#architecture">Architecture</a>
+      <a href="page.html#agents">Agents</a>
+      <a href="page.html#fi">FI Scoring</a>
+      <a href="page.html#rules">Rule Engine</a>
+    </div>
+    <div>
+      <h4>Integrations</h4>
+      <a href="page.html#integrations">SIEM setup</a>
+      <a href="page.html#integrations">On-device LLM</a>
+      <a href="#">HuggingFace models</a>
+      <a href="#">Webhook format</a>
+    </div>
+    <div>
+      <h4>Project</h4>
+      <a href="#">GitHub</a>
+      <a href="#">Paper</a>
+      <a href="#">Dataset</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 HydraPoT · MIT License</span>
+    <span class="mono">v0.1.0 · port :2222</span>
+  </div>
+</footer>
+
+<!-- SQUID -->
+<div class="squid" id="squid">
+  <div class="squid-bubble" id="squidBubble">free traps are best traps</div>
+  <div class="squid-inner" id="squidInner">
+    <svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg">
+      <path id="tent1" class="squid-tentacle-fill" d="M 30 75 Q 22 95, 28 115 Q 32 125, 26 135" />
+      <path id="tent2" class="squid-tentacle-fill" d="M 45 80 Q 40 100, 44 120 Q 48 130, 42 138" />
+      <path id="tent3" class="squid-tentacle-fill" d="M 60 82 Q 58 105, 60 125 Q 62 132, 60 140" />
+      <path id="tent4" class="squid-tentacle-fill" d="M 75 80 Q 80 100, 76 120 Q 72 130, 78 138" />
+      <path id="tent5" class="squid-tentacle-fill" d="M 90 75 Q 98 95, 92 115 Q 88 125, 94 135" />
+      <ellipse class="squid-body" cx="60" cy="55" rx="42" ry="38" />
+      <path class="squid-body" d="M 25 35 Q 18 20, 28 18 Q 34 22, 30 35 Z" />
+      <path class="squid-body" d="M 95 35 Q 102 20, 92 18 Q 86 22, 90 35 Z" />
+      <g id="leftEye">
+        <ellipse class="squid-body" cx="45" cy="55" rx="11" ry="13" style="fill:var(--paper);" />
+        <circle id="leftPupil" class="squid-eye" cx="45" cy="55" r="6" />
+        <circle class="squid-eye-shine" cx="47" cy="52" r="2" />
+      </g>
+      <g id="rightEye">
+        <ellipse class="squid-body" cx="75" cy="55" rx="11" ry="13" style="fill:var(--paper);" />
+        <circle id="rightPupil" class="squid-eye" cx="75" cy="55" r="6" />
+        <circle class="squid-eye-shine" cx="77" cy="52" r="2" />
+      </g>
+      <path d="M 52 75 Q 60 80, 68 75" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round" />
+    </svg>
+  </div>
+</div>
+
+<script>
+(function() {
+  // ===== SCROLL REVEAL =====
+  var els = document.querySelectorAll('[data-reveal]');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(function(el) { el.classList.add('is-visible'); });
+  } else {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    els.forEach(function(el) { io.observe(el); });
+  }
+
+  // ===== BILLING TOGGLE =====
+  var prices = {
+    scout:    { monthly: 0,  yearly: 0  },
+    sentinel: { monthly: 29, yearly: 23 },
+    hunter:   { monthly: 99, yearly: 79 }
+  };
+
+  var mode = 'monthly';
+  var lblMonthly = document.getElementById('lblMonthly');
+  var lblYearly  = document.getElementById('lblYearly');
+  var pill       = document.getElementById('togglePill');
+  var saveBadge  = document.getElementById('saveBadge');
+
+  function positionPill(label) {
+    pill.style.left  = label.offsetLeft + 'px';
+    pill.style.width = label.offsetWidth + 'px';
+  }
+
+  // init pill on monthly
+  window.addEventListener('load', function() { positionPill(lblMonthly); });
+  // fallback for fast paints
+  setTimeout(function() { positionPill(mode === 'monthly' ? lblMonthly : lblYearly); }, 50);
+
+  function setMode(m) {
+    mode = m;
+    var isYearly = m === 'yearly';
+
+    lblMonthly.classList.toggle('active', !isYearly);
+    lblYearly.classList.toggle('active', isYearly);
+    positionPill(isYearly ? lblYearly : lblMonthly);
+    saveBadge.classList.toggle('hidden', !isYearly);
+
+    // update prices with flip animation
+    var ids = ['scout', 'sentinel', 'hunter'];
+    ids.forEach(function(id) {
+      var amountEl = document.getElementById(id + 'Price');
+      var origEl   = document.getElementById(id + 'Orig');
+      var p = prices[id];
+
+      amountEl.style.opacity = '0';
+      amountEl.style.transform = 'translateY(-8px)';
+
+      setTimeout(function() {
+        amountEl.textContent = isYearly ? p.yearly : p.monthly;
+        if (isYearly && p.monthly > 0) {
+          origEl.textContent = '$' + p.monthly + '/mo';
+        } else {
+          origEl.innerHTML = '&nbsp;';
+        }
+        amountEl.style.opacity = '1';
+        amountEl.style.transform = 'translateY(0)';
+      }, 180);
+    });
+  }
+
+  lblMonthly.addEventListener('click', function() { setMode('monthly'); });
+  lblYearly.addEventListener('click',  function() { setMode('yearly'); });
+
+  // ===== FAQ =====
+  document.querySelectorAll('.faq-item').forEach(function(item) {
+    item.querySelector('.faq-q').addEventListener('click', function() {
+      item.classList.toggle('open');
+    });
+  });
+
+  // ===== SQUID =====
+  var squid     = document.getElementById('squid');
+  var squidInner = document.getElementById('squidInner');
+  var bubble    = document.getElementById('squidBubble');
+  var leftPupil  = document.getElementById('leftPupil');
+  var rightPupil = document.getElementById('rightPupil');
+  var tentacles  = ['tent1','tent2','tent3','tent4','tent5'].map(function(id) { return document.getElementById(id); });
+
+  var mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2, t = 0;
+  window.addEventListener('mousemove', function(e) { mouseX = e.clientX; mouseY = e.clientY; });
+
+  function updateSquid() {
+    t += 0.016;
+    var rect = squid.getBoundingClientRect();
+    var cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
+    var dx = mouseX - cx, dy = mouseY - cy, dist = Math.sqrt(dx*dx + dy*dy);
+    var maxOff = 3;
+    var px = (dx / Math.max(dist,1)) * Math.min(dist/50,1) * maxOff;
+    var py = (dy / Math.max(dist,1)) * Math.min(dist/50,1) * maxOff;
+    leftPupil.setAttribute('cx', 45 + px); leftPupil.setAttribute('cy', 55 + py);
+    rightPupil.setAttribute('cx', 75 + px); rightPupil.setAttribute('cy', 55 + py);
+    squidInner.style.transform = 'translate('+Math.max(-8,Math.min(8,dx/80))+'px,'+Math.max(-4,Math.min(4,dy/120))+'px)';
+    var td = [{x:30,s:-1},{x:45,s:-0.5},{x:60,s:0},{x:75,s:0.5},{x:90,s:1}];
+    tentacles.forEach(function(ten, i) {
+      var d = td[i];
+      var w1 = Math.sin(t*2+i*0.7)*6, w2 = Math.sin(t*2.5+i*0.9)*8;
+      ten.setAttribute('d','M '+d.x+' 75 Q '+(d.x+d.s*8+w1)+' 95, '+(d.x+d.s*4+w1)+' 115 Q '+(d.x+d.s*2+w2)+' 125, '+(d.x+d.s*6+w2)+' 135');
+    });
+    requestAnimationFrame(updateSquid);
+  }
+  updateSquid();
+
+  var bubbleLines = ['free traps are best traps','$0 → real Cowrie','pay for LLMs, not overhead','scout mode active','yearly saves 20%','port 2222 never sleeps','log everything','hi again 👋'];
+  var bIdx = 0, bTimer;
+  function showBubble() {
+    bubble.textContent = bubbleLines[bIdx];
+    bIdx = (bIdx + 1) % bubbleLines.length;
+    bubble.classList.add('show');
+    clearTimeout(bTimer);
+    bTimer = setTimeout(function() { bubble.classList.remove('show'); }, 2800);
+  }
+  setTimeout(showBubble, 1500);
+  setInterval(function() { if (!bubble.classList.contains('show') && Math.random() < 0.5) showBubble(); }, 8000);
+  squid.style.pointerEvents = 'auto';
+  squid.style.cursor = 'pointer';
+  squid.addEventListener('click', showBubble);
+})();
+</script>
+
+</body>
+</html>
