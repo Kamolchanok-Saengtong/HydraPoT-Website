@@ -1,0 +1,164 @@
+Here's the full project overview:
+
+---
+
+**HydraPoT V0.1.0-Demo_2025S2**
+*An Intelligent Honeypot Framework Using Large Language Models for Interactive Attack Analysis*
+
+---
+
+**What It Is**
+
+HydraPoT is a multi-agent SSH honeypot system that tricks attackers into thinking they are on a real Linux server. When an attacker connects via SSH, every command they type is intelligently routed to one of three specialized agents that generate realistic fake responses. Unlike traditional static honeypots like Cowrie, HydraPoT can handle complex, context-dependent commands by leveraging LLMs.
+
+---
+
+**The Problem It Solves**
+
+Traditional honeypots (Cowrie) are static — they can only respond to pre-configured commands and fail completely when attackers use complex scripts, obfuscated commands, or context-dependent sequences. Pure LLM honeypots (ShelLM) solve the flexibility problem but are too expensive to run and have no context memory. HydraPoT sits in between — using each agent only where it excels.
+
+---
+
+**System Architecture**
+
+The attacker connects to port 2222 via SSH. Every command passes through:
+
+1. **Honey Router** — classifies every command into a FI (Fidelity Impact) category using pattern matching and Shannon entropy. Routes to the appropriate agent.
+
+2. **FI Manager** — scores every command FI0–FI4. Stores impactful commands (FI≥2) in a memory buffer using a retention formula based on risk level and recency. Prunes the buffer to maximum 10 events.
+
+3. **Three Agents:**
+   - **Cowrie Agent** — handles FI0–FI1 (simple read/display and install/create commands). Connects via raw Paramiko SSH to a real Cowrie Docker container. Returns real Cowrie responses.
+   - **On-Device LLM Agent** — handles FI2–FI3 (modify/navigate and service/elevate commands). Runs Qwen2.5-Coder-7B-Instruct-GGUF locally on the professor's GPU. Context-aware — uses session history to generate realistic responses.
+   - **Cloud LLM Agent** — handles FI4 (high-impact destructive commands) and obfuscated/complex commands. Uses ChatGPT-5 via API. Handles base64, hex-encoded, multi-pipe, and reverse shell commands.
+
+4. **Session Logging** — every command logged to `session_log.json`. FI≥2 commands additionally logged to `impactful_log.json`.
+
+---
+
+**FI (Fidelity Impact) Score System**
+
+| FI | Category | Examples | Agent |
+|---|---|---|---|
+| 0 | Read/Display | ls, whoami, cat, uname | Cowrie |
+| 1 | Create/Install | touch, mkdir, wget, apt-get | Cowrie |
+| 2 | Modify/Navigate | chmod, rm, cd, echo > file | On-device |
+| 3 | Service/Download/Elevate | sudo, systemctl, nmap, curl\|bash | On-device |
+| 4 | Impact/Delete/Passwd | passwd, rm -rf, useradd, chmod 777 | Cloud |
+
+---
+
+**Honey Router Logic**
+
+Cloud is checked FIRST before pattern matching:
+- Cloud condition: entropy > 4.8 AND length ≥ 90, OR operator count ≥ 2, OR pipe to shell, OR hex escape, OR base64 pattern
+- Then Cowrie patterns (basic commands, file ops, package install, sudo, download)
+- Then On-device patterns (script execution, service status, version queries)
+- Fallback: on-device
+
+---
+
+**Tech Stack**
+
+| Component | Technology |
+|---|---|
+| SSH honeypot base | Cowrie in Docker |
+| On-device LLM | Qwen2.5-Coder-7B-Instruct-GGUF |
+| Cloud LLM | ChatGPT-5 via API |
+| SSH connection | Paramiko |
+| Language | Python 3.10 |
+| Environment | honeypot_new venv |
+| Server | Intel Core i7-11700K, 32GB RAM, RTX 4060 |
+| Logging | JSON files (session_log.json, impactful_log.json) |
+
+---
+
+**Evaluation Results Summary**
+
+**Output-Based (481 commands, mrheinen/linux-commands dataset):**
+
+| Agent | Avg Latency | BERTScore | Sequence (FI2) | BLEU (FI2) |
+|---|---|---|---|---|
+| Cowrie | 116–497ms | ~80% | 0.26 | 0.05 |
+| On-device old | 1,471–3,038ms | ~80% | 0.49 | 0.08 |
+| On-device new | 3,609–5,709ms | ~80–95% | 0.75 | 0.14 |
+| Cloud LLM | N/A (API) | ~85–96% | 0.85 | 0.22 |
+
+**Model Switch Impact (Old → New):**
+- BLEU: +158.8% (FI0), +73.6% (FI2), +146.0% (FI3)
+- Sequence: +64.6% (FI0), +54.4% (FI2), +55.6% (FI3)
+- GFLOPs: 229,296 → 28,209 (87.7% reduction)
+- VRAM: 2,954 MB → 5,591 MB (stable, no memory leak)
+
+**LLM-as-Judge Realism (1–5 scale, avg of Claude + ChatGPT judges):**
+
+| Agent | FI0 | FI1 | FI2 | FI3 |
+|---|---|---|---|---|
+| Cowrie | 2.94 | 2.36 | 2.82 | 1.61 |
+| On-device old | 2.19 | 2.25 | 2.50 | 1.61 |
+| On-device new | 3.07 | 3.14 | 2.68 | 2.58 |
+| Cloud LLM | 3.58 | 3.29 | 3.86 | 4.07 |
+
+**Cost Analysis:**
+- Cloud: $0.000501 for 473 commands (0.5% of $0.10 budget)
+- On-device new: $0.000034 equivalent (A100 $1.35/hr reference), actual $0
+- Session projection: Honey Router saves 97% of cloud cost
+- Budget capacity: 340,426 sessions per $0.10/month
+
+---
+
+**Themed Attack Evaluation (6 themes, LLM-as-Judge)**
+
+| Theme | FI Distribution | Primary Agent |
+|---|---|---|
+| Crypto-Jacker | FI0, FI1, FI2 | Cowrie + On-device |
+| Source Code Auditor | FI0, FI2 | Cowrie + On-device |
+| Network Pivoter | FI0, FI1, FI3 | Cowrie + On-device |
+| Data Exfiltrator | FI0, FI1, FI2 | Cowrie + On-device |
+| System Saboteur | FI0, FI1, FI2 | Cowrie + On-device |
+| Scorched Earth | FI0, FI4 | Cowrie + Cloud |
+
+---
+
+**Session Cost Projection (10 CyberLab + 6 Themed)**
+- 162 commands across 16 sessions
+- Only 4 sessions triggered cloud (Theme6 + 3 CyberLab with 1 command each)
+- Theme6 Scorched Earth: 75% cloud commands (12/16 FI4)
+- Total cost: $0.000005 across all 16 sessions
+- At 100 sessions/month: $0.000029 = 0.03% of budget
+
+---
+
+**Known Limitations**
+- Cowrie filesystem doesn't persist between commands
+- bash_history sync has limitations
+- Token estimation uses 4 chars/token approximation
+- On-device realism still below 3.0 midpoint for most FI groups
+- Hybrid routing (Cowrie + On-device collaboration for FI2–FI3) not yet implemented
+
+---
+
+**Future Work — V0.23.0-Beta_2026S1**
+- Context-aware hybrid routing for FI2–FI3: Cowrie handles static responses, on-device handles context-dependent commands
+- Database migration from JSON to SQLite
+- Real hybrid deployment validation with actual attacker sessions
+- Improve on-device realism for FI2–FI3 range
+
+
+
+#command
+Usage: hp [OPTIONS] COMMAND [ARGS]...
+
+  HydraPoT: Multi Agent Honeypot System
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  config     Show current configuration.
+  dashboard  Open the analytics dashboard.
+  init       Run the setup wizard to configure HydraPoT.
+  logs       View recent log entries.
+  run        Start the honeypot server.
+  version    Show HydraPoT version.
+(honeypot_new) creamy@oak-System-Product-Name:/mnt/data-partition/honeypot$ 

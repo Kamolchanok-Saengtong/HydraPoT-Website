@@ -1197,6 +1197,7 @@
       <li><a href="#agents">Agents</a></li>
       <li><a href="#fi">FI Scoring</a></li>
       <li><a href="#rules">Rule Engine</a></li>
+      <li><a href="#dashboard">Dashboard</a></li>
       <li><a href="#integrations">Integrations</a></li>
       <li><a href="#" id="docsNavBtn">Docs</a></li>
       <li><a href="pricing.html">Pricing</a></li>
@@ -1209,14 +1210,14 @@
 <section class="hero">
   <div class="hero-grid">
     <div data-reveal>
-      <span class="badge"><span class="badge-dot"></span> Active honeypot · Port 2222</span>
+      <span class="badge"><span class="badge-dot"></span> Active honeypot · Port 22</span>
       <h1>
         Bait. <span class="swirl">Trick.</span><br>
         Learn from <span class="accent">every</span><br>
         intruder.
       </h1>
       <p class="hero-sub">
-        Traditional honeypots break the moment attackers go off-script. HydraPoT doesn't. Three specialized agents — Cowrie, an on-device Qwen LLM, and a GPT-5 cloud fallback — collaborate in real time, routed by a fidelity-aware classifier that keeps every session convincing.
+        Built for real attackers, not scripted demos. HydraPoT intelligently routes every command to the right execution engine, preserving realistic behavior throughout the entire attack session.
       </p>
       <div class="hero-actions">
         <a href="#architecture" class="btn-primary">Explore the system →</a>
@@ -1225,7 +1226,7 @@
       <div class="hero-stats">
         <div>
           <div class="stat-num">BYO</div>
-          <div class="stat-label">Your LLM, your SIEM, your rules — zero lock-in</div>
+          <div class="stat-label">Your LLM, your SIEM, your rules, zero lock-in!!</div>
         </div>
         <div>
           <div class="stat-num">3</div>
@@ -1256,14 +1257,14 @@
     <div class="section-head">
       <div class="eyebrow">Architecture</div>
       <h2>One command, three brains.</h2>
-      <p class="section-sub">Every keystroke flows through the Honey Router, gets scored for fidelity impact, and is dispatched to the agent best equipped to fake its output — all in under 500 ms for routine commands.</p>
+      <p class="section-sub">Every keystroke flows through the Honey Router, which classifies the command by mechanism and dispatches it to the right agent. Separately, the FI Manager scores each command for impact and manages the LLM's context window — all in under 500 ms for routine commands.</p>
     </div>
 
     <div class="flow-diagram">
       <div class="flow-node">
         <div class="flow-node-label">Source</div>
         <div class="flow-node-title">Attacker</div>
-        <div class="flow-node-sub">SSH :2222</div>
+        <div class="flow-node-sub">SSH :22</div>
       </div>
       <div class="flow-arrow">→</div>
       <div class="flow-node highlight">
@@ -1290,7 +1291,7 @@
       </div>
       <div class="flow-branch">
         <div class="flow-branch-name">cloud_agent</div>
-        <div class="flow-branch-sub">GPT-5 · API</div>
+        <div class="flow-branch-sub">GPT-4o mini</div>
       </div>
     </div>
   </div>
@@ -1302,7 +1303,7 @@
     <div class="section-head">
       <div class="eyebrow">Why HydraPoT</div>
       <h2>Static traps lie.<br>API-only traps drain your wallet.</h2>
-      <p class="section-sub">HydraPoT routes every command to the cheapest agent that can still fool the attacker — spending zero cloud credits on simple recon and saving GPT-5 power for when it actually matters.</p>
+      <p class="section-sub">HydraPoT routes every command to the cheapest agent that can still fool the attacker — spending zero cloud credits on simple recon and saving GPT-4o mini power for when it actually matters.</p>
     </div>
 
     <div class="vs-grid stagger-reveal">
@@ -1330,7 +1331,6 @@
           <li class="vs-item pro"><span class="vi-pro">✓</span>Creative &amp; context-aware responses</li>
           <li class="vs-item con"><span class="vi-con">✗</span>Every command hits the API — costs add up fast</li>
           <li class="vs-item con"><span class="vi-con">✗</span>No memory between commands</li>
-          <li class="vs-item con"><span class="vi-con">✗</span>Slow on trivial <span style="font-family:'JetBrains Mono',monospace">ls</span> / <span style="font-family:'JetBrains Mono',monospace">whoami</span></li>
           <li class="vs-item con"><span class="vi-con">✗</span>Locked to one API vendor</li>
         </ul>
       </div>
@@ -1343,7 +1343,7 @@
         <ul class="vs-list">
           <li class="vs-item pro"><span class="vi-pro">✓</span>Cowrie handles routine recon — fast, free</li>
           <li class="vs-item pro"><span class="vi-pro">✓</span>On-device LLM for complex commands — no API cost</li>
-          <li class="vs-item pro"><span class="vi-pro">✓</span>GPT-5 only when the attacker goes deep</li>
+          <li class="vs-item pro"><span class="vi-pro">✓</span>GPT-4o mini only when the attacker goes deep</li>
           <li class="vs-item pro"><span class="vi-pro">✓</span>Full session context across all three agents</li>
           <li class="vs-item pro"><span class="vi-pro">✓</span>Handles base64, reverse shells, multi-pipe payloads</li>
           <li class="vs-item pro"><span class="vi-pro">✓</span>BYO LLM &amp; SIEM — zero vendor lock-in</li>
@@ -1391,11 +1391,11 @@
       <div class="agent-num">03 / cloud_agent.py</div>
       <div class="agent-icon">☁</div>
       <div class="agent-title">Cloud Fallback</div>
-      <div class="agent-desc">GPT-5 via API. Reserved for the commands that would fool nothing else — obfuscated payloads, base64 blobs, reverse shells, and multi-stage exploits. The heaviest weapon in the stack, deployed only when the situation demands it.</div>
+      <div class="agent-desc">GPT-4o mini via API. Reserved for the commands that would fool nothing else — obfuscated payloads, base64 blobs, reverse shells, and multi-stage exploits. The heaviest weapon in the stack, deployed only when the situation demands it.</div>
       <ul class="agent-handles">
-        <li>entropy &gt; 4.8</li>
-        <li>pipe-to-shell</li>
-        <li>base64 / hex escapes</li>
+        <li>eval / bash -c payloads</li>
+        <li>pipe-to-interpreter</li>
+        <li>base64 / hex encoding</li>
       </ul>
     </div>
   </div>
@@ -1426,7 +1426,7 @@
   <div class="section-head" data-reveal>
     <div class="eyebrow">Fidelity Impact</div>
     <h2>Not all commands are dangerous.</h2>
-    <p class="section-sub">Every command earns an FI score from 0 to 4. The score decides which agent responds, what gets logged, what stays in the LLM's context window, and when to escalate to the cloud fallback.</p>
+    <p class="section-sub">Every command receives an FI score between 0 and 4. The score determines what stays in memory and what gets logged. It never affects routing. A separate rule-based classifier selects the appropriate execution engine, while high-impact commands are preserved longer than routine reconnaissance.</p>
   </div>
 
   <div class="fi-grid">
@@ -1477,7 +1477,7 @@
 FI_weight      = fi / 4
 Recency_weight = 1 / (1 + age_min)</pre>
         <p style="font-size: 13px; color: var(--ink-2); margin-top: 16px; line-height: 1.6;">
-          When the impactful buffer hits 11 events, the row with the lowest retention is dropped. High-FI commands survive longer — recent recon falls off first, dangerous calls stick around as context.
+          When the FI ≥ 2 buffer hits 10 events, the row with the lowest retention is dropped. High-FI commands survive longer — recent recon falls off first, dangerous calls stick around as context.
         </p>
       </div>
     </div>
@@ -1488,8 +1488,8 @@ Recency_weight = 1 / (1 + age_min)</pre>
 <section id="rules">
   <div class="section-head" data-reveal>
     <div class="eyebrow">Rule Engine</div>
-    <h2>Your rules. Your trap.</h2>
-    <p class="section-sub">Drop a YAML file into <span style="font-family:'JetBrains Mono',monospace; font-size:15px;">rules/</span> and override anything — responses, FI weights, routing, alert thresholds. No code changes, no redeploy.</p>
+    <h2>Your rules Your trap You can control</h2>
+    <p class="section-sub">Make HydraPoT your own. Add a YAML file to  <span style="font-family:'JetBrains Mono',monospace; font-size:15px;">rules/</span> and customize responses, FI weights, routing rules, and alert thresholds instantly. No coding. No redeployment</p>
   </div>
 
   <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: start;">
@@ -1593,6 +1593,68 @@ Recency_weight = 1 / (1 + age_min)</pre>
   </div>
 </section>
 
+<!-- SIEM DASHBOARD -->
+<section id="dashboard">
+  <div class="section-head" data-reveal>
+    <div class="eyebrow">Threat Intelligence Platform</div>
+    <h2>Not just a honeypot.<br>A full SOC weapon.</h2>
+    <p class="section-sub">HydraPoT ships with a built-in SIEM-grade dashboard — purpose-built for SOC teams who need attacker intelligence, not just logs. One platform to capture, classify, correlate, and act.</p>
+  </div>
+
+  <!-- Full-width screenshot -->
+  <div data-reveal="scale" style="margin-bottom: 56px;">
+    <div style="border-radius:24px; overflow:hidden; border:2px solid var(--ink); box-shadow: 16px 16px 0 var(--y-400), 16px 16px 0 1px var(--ink);">
+      <div style="background:#2A2118; padding:13px 18px; display:flex; align-items:center; gap:8px; border-bottom:1px solid rgba(255,255,255,0.08);">
+        <span class="term-dot dot-r"></span>
+        <span class="term-dot dot-y"></span>
+        <span class="term-dot dot-g"></span>
+        <span style="color:rgba(255,255,255,0.45); font-family:'JetBrains Mono',monospace; font-size:12px; margin-left:10px;">HydraPoT — Threat Dashboard</span>
+      </div>
+      <img src="SIEM.png" alt="HydraPoT built-in SIEM dashboard" style="width:100%; display:block;" />
+    </div>
+  </div>
+
+  <!-- Feature cards below -->
+  <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;" class="stagger-reveal">
+
+    <div class="rule-feat">
+      <div class="rule-feat-icon">⬡</div>
+      <div class="rule-feat-title">Real-time monitoring</div>
+      <div class="rule-feat-desc">Every session, command, FI score, and agent decision surfaces live — no query required.</div>
+    </div>
+
+    <div class="rule-feat">
+      <div class="rule-feat-icon">◈</div>
+      <div class="rule-feat-title">FI-ranked timeline</div>
+      <div class="rule-feat-desc">Destructive actions and privilege escalation automatically rise to the top for faster triage.</div>
+    </div>
+
+    <div class="rule-feat">
+      <div class="rule-feat-icon">⇄</div>
+      <div class="rule-feat-title">Session replay &amp; TTPs</div>
+      <div class="rule-feat-desc">Replay full attacker sessions step by step. See which agent handled each command and what the attacker believed.</div>
+    </div>
+
+    <div class="rule-feat">
+      <div class="rule-feat-icon">🔔</div>
+      <div class="rule-feat-title">SIEM-grade alerting</div>
+      <div class="rule-feat-desc">Critical events fire enriched alerts tagged by severity and FI level — forward out or keep them in the built-in dashboard.</div>
+    </div>
+
+  </div>
+
+  <div style="margin-top: 32px; background:var(--y-100); border:2px solid var(--ink); border-radius:16px; padding:24px 28px; display:flex; align-items:center; gap:24px;" data-reveal>
+    <img src="CoC.png" alt="College of Computing, PSU Phuket" style="height:64px; width:auto; flex-shrink:0; border-radius:8px;" />
+    <div>
+      <div style="font-size:15px; font-weight:700; margin-bottom:4px;">Developed by Kamolchanok Saengtong</div>
+      <div style="font-size:13px; color:var(--ink-3); line-height:1.65;">
+        Undergraduate student at the <strong>College of Computing (CoC)</strong>, Prince of Songkla University, Phuket Campus. HydraPoT is an academic research project exploring multi-agent honeypot architecture and threat intelligence — built to go beyond passive trapping and give defenders real, actionable insight into attacker behaviour.
+      </div>
+    </div>
+  </div>
+
+</section>
+
 <!-- INTEGRATIONS -->
 <section id="integrations" style="background: var(--y-50); border-radius: 32px; margin: 40px auto;">
   <div class="section-head" data-reveal>
@@ -1605,7 +1667,7 @@ Recency_weight = 1 / (1 + age_min)</pre>
     <div class="metric-card" style="padding: 36px;" data-reveal data-delay="100">
       <div class="icon">⇌</div>
       <div class="metric-name" style="font-size: 18px; margin-bottom: 10px;">Plug In Your Own SIEM</div>
-      <div class="metric-desc" style="font-size: 13px; line-height: 1.65; margin-bottom: 20px;">Every command, FI score, agent decision, and raw response is emitted as a structured JSON event. One env var points it at any pipeline — the schema never changes.</div>
+      <div class="metric-desc" style="font-size: 13px; line-height: 1.65; margin-bottom: 20px;">Every action is captured as a structured JSON event. Commands, FI scores, routing decisions, and raw responses follow a consistent schema, making integration with existing monitoring and analytics platforms straightforward.</div>
       <pre style="background: var(--ink); color: var(--y-300); padding: 14px 16px; border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.7; overflow-x: auto;">HYDRAPOT_SIEM_ENDPOINT=http://splunk:8088/services/collector \
 python main.py</pre>
       <div class="provider-grid" style="margin-top: 18px;">
@@ -1640,7 +1702,7 @@ python main.py</pre>
     <div class="metric-card" style="padding: 36px;" data-reveal data-delay="200">
       <div class="icon">◉</div>
       <div class="metric-name" style="font-size: 18px; margin-bottom: 10px;">Choose Your On-Device Model</div>
-      <div class="metric-desc" style="font-size: 13px; line-height: 1.65; margin-bottom: 20px;">The <span style="font-family:'JetBrains Mono',monospace;">ondevice_agent</span> loader is model-agnostic. Ships with Qwen2.5-Coder-7B. Swap to any HuggingFace checkpoint or run locally via Ollama — session state and the FI router wire up automatically.</div>
+      <div class="metric-desc" style="font-size: 13px; line-height: 1.65; margin-bottom: 20px;">Your model, your choice. HydraPoT includes Qwen2.5-Coder-7B out of the box and makes it easy to switch to any Hugging Face checkpoint or a local Ollama model. Everything else continues to work automatically.</div>
       <pre style="background: var(--ink); color: var(--y-300); padding: 14px 16px; border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.7; overflow-x: auto;">ONDEVICE_MODEL=microsoft/Phi-3-mini-4k-instruct \
 python main.py</pre>
       <div class="provider-grid" style="margin-top: 18px;">
@@ -1757,7 +1819,7 @@ python main.py</pre>
             <h4>Clone &amp; install</h4>
             <p>Pull the repo and install Python dependencies into a virtual environment.</p>
             <div class="doc-code"><span class="cmt"># clone</span>
-git clone https://github.com/hydrapot/hydrapot
+git clone https://github.com/Kamolchanok-Saengtong/HydraPoT
 cd hydrapot
 
 <span class="cmt"># create venv and install</span>
@@ -1790,7 +1852,7 @@ hp run
 <span class="cmt"># → Listening on 0.0.0.0:2222</span>
 <span class="cmt"># → Cowrie agent    ✓  connected</span>
 <span class="cmt"># → On-device LLM   ✓  Qwen2.5-Coder-7B loaded</span>
-<span class="cmt"># → Cloud LLM       ✓  GPT-5 ready</span></div>
+<span class="cmt"># → Cloud LLM       ✓  GPT-4o mini ready</span></div>
           </div>
         </div>
       </div>
@@ -1881,7 +1943,7 @@ Commands:
         <div class="doc-flow-row">
           <div class="doc-flow-spine"><div class="doc-flow-dot"></div><div class="doc-flow-line"></div></div>
           <div class="doc-flow-body">
-            <div class="doc-flow-title">① Attacker connects — SSH :2222</div>
+            <div class="doc-flow-title">① Attacker connects — SSH :22</div>
             <div class="doc-flow-sub">Raw paramiko session opens. Every keystroke is captured and forwarded into the pipeline. The attacker sees a convincing Ubuntu 22.04 banner.</div>
           </div>
         </div>
@@ -1906,7 +1968,7 @@ Commands:
             <div class="doc-flow-sub">
               <strong style="color:var(--ink);">cowrie_agent</strong> — Paramiko SSH into real Cowrie container. FI 0–1.<br>
               <strong style="color:var(--ink);">ondevice_agent</strong> — Qwen2.5-Coder-7B locally. FI 2–3. Uses session history.<br>
-              <strong style="color:var(--ink);">cloud_agent</strong> — GPT-5 via API. FI 4 + obfuscated commands.
+              <strong style="color:var(--ink);">cloud_agent</strong> — GPT-4o mini via API. FI 4 + obfuscated commands.
             </div>
           </div>
         </div>
@@ -1953,7 +2015,7 @@ Commands:
             <td><span class="fi-pip f4">4</span></td>
             <td>Impact / Destructive</td>
             <td><code>passwd</code> <code>rm -rf /</code> <code>useradd</code> <code>chmod 777</code></td>
-            <td>Cloud LLM (GPT-5)</td>
+            <td>Cloud LLM (GPT-4o mini)</td>
           </tr>
         </tbody>
       </table>
@@ -2115,7 +2177,7 @@ Recency_weight = 1 / (1 + age_in_minutes)
         <tbody>
           <tr><td>SSH honeypot base</td><td>Cowrie in Docker</td></tr>
           <tr><td>On-device LLM</td><td>Qwen2.5-Coder-7B-Instruct-GGUF (swappable)</td></tr>
-          <tr><td>Cloud LLM</td><td>GPT-5 via API (OpenAI-compatible)</td></tr>
+          <tr><td>Cloud LLM</td><td>GPT-4o mini via API (OpenAI-compatible)</td></tr>
           <tr><td>SSH transport</td><td>Paramiko</td></tr>
           <tr><td>Language</td><td>Python 3.10+</td></tr>
           <tr><td>Session logs</td><td>JSON — <code>session_log.json</code>, <code>impactful_log.json</code></td></tr>
@@ -2174,12 +2236,12 @@ Recency_weight = 1 / (1 + age_in_minutes)
     <div class="eyebrow">Get started</div>
     <h2>Spin up the trap.</h2>
     <p>Deploy in minutes. Attackers get a convincing Linux box. You get structured threat intelligence.</p>
-    <pre style="background: var(--ink); color: var(--y-300); padding: 20px 28px; border-radius: 12px; font-family: 'JetBrains Mono', monospace; font-size: 14px; display: inline-block; text-align: left; margin-bottom: 32px;">$ git clone https://github.com/hydrapot/hydrapot
+    <pre style="background: var(--ink); color: var(--y-300); padding: 20px 28px; border-radius: 12px; font-family: 'JetBrains Mono', monospace; font-size: 14px; display: inline-block; text-align: left; margin-bottom: 32px;">$ git clone https://github.com/Kamolchanok-Saengtong/HydraPoT
 $ pip install -r requirements.txt
 $ python main.py</pre>
     <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
       <a href="#" id="docsCtaBtn" class="btn-primary" style="background: var(--ink); color: var(--y-300);">Read the docs →</a>
-      <a href="#" class="btn-secondary">Start on GitHub</a>
+      <a href="https://github.com/Kamolchanok-Saengtong/HydraPoT" target="_blank" rel="noopener" class="btn-secondary">Start on GitHub</a>
     </div>
   </div>
 </section>
@@ -2210,7 +2272,7 @@ $ python main.py</pre>
     </div>
     <div>
       <h4>Project</h4>
-      <a href="#">GitHub</a>
+      <a href="https://github.com/Kamolchanok-Saengtong/HydraPoT" target="_blank" rel="noopener">GitHub</a>
       <a href="#">Paper</a>
       <a href="#">Dataset</a>
       <a href="#">Contact</a>
