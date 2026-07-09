@@ -481,6 +481,7 @@
     gap: 60px;
     align-items: start;
   }
+  .fi-grid > * { min-width: 0; }
   .fi-list {
     list-style: none;
   }
@@ -524,6 +525,7 @@
     border-radius: 20px;
     padding: 32px;
     box-shadow: 8px 8px 0 var(--ink);
+    min-width: 0;
   }
   .formula-card h3 {
     font-size: 20px;
@@ -549,6 +551,7 @@
     border-radius: 16px;
     padding: 24px;
     position: relative;
+    min-width: 0;
   }
   .metric-card .icon {
     width: 36px; height: 36px;
@@ -1182,6 +1185,7 @@
     .agents, .footer-inner, .hero-stats { grid-template-columns: 1fr; }
     .flow { padding: 32px 24px; }
     .cta-box { padding: 48px 24px; box-shadow: 6px 6px 0 var(--ink); }
+    .flow-branches { grid-template-columns: 1fr; }
     #control-sub-grid, #logs-feat-grid, #dashboard-feat-grid { grid-template-columns: 1fr !important; }
   }
 </style>
