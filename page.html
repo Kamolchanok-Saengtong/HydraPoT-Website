@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>HydraPOT — Multi-Agent SSH Honeypot</title>
+<title>HydraPOT · Multi-Agent SSH Honeypot</title>
 <link rel="icon" type="image/png" href="H_logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -384,6 +384,126 @@
     font-weight: 700;
   }
 
+  /* ===== MILESTONE BANNER ===== */
+  .milestone-banner {
+    background: var(--ink);
+    border-radius: 32px;
+    padding: 64px 48px;
+    color: var(--paper);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 12px 12px 0 var(--y-400), 12px 12px 0 1px var(--ink);
+  }
+  .milestone-banner:before {
+    content: "";
+    position: absolute;
+    top: -120px; left: -80px;
+    width: 320px; height: 320px;
+    background: var(--y-400);
+    border-radius: 50%;
+    opacity: 0.18;
+    filter: blur(70px);
+  }
+  .milestone-banner:after {
+    content: "";
+    position: absolute;
+    bottom: -140px; right: -100px;
+    width: 340px; height: 340px;
+    background: #FF79C6;
+    border-radius: 50%;
+    opacity: 0.14;
+    filter: blur(80px);
+  }
+  .milestone-inner { position: relative; z-index: 1; }
+  .milestone-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(252, 211, 77, 0.12);
+    border: 1px solid rgba(252, 211, 77, 0.35);
+    color: var(--y-300);
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .milestone-banner h2 {
+    color: var(--paper);
+    font-size: clamp(30px, 4.2vw, 50px);
+    line-height: 1.15;
+    margin-bottom: 18px;
+  }
+  .milestone-banner h2 .accent2 {
+    background: var(--y-400);
+    padding: 2px 8px;
+    border-radius: 8px;
+    color: var(--ink);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .milestone-sub {
+    font-size: 17px;
+    color: rgba(255, 252, 242, 0.68);
+    max-width: 620px;
+    margin: 0 auto 32px;
+    line-height: 1.65;
+  }
+  .milestone-chips {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .milestone-chip {
+    background: rgba(255, 252, 242, 0.06);
+    border: 1px solid rgba(255, 252, 242, 0.16);
+    color: var(--paper);
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-size: 13.5px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+  .milestone-chip:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+    background: rgba(255, 252, 242, 0.1);
+  }
+  .milestone-chip.fingers {
+    background: var(--y-400);
+    color: var(--ink);
+    border-color: var(--y-400);
+  }
+  .milestone-chip.fingers:hover {
+    background: var(--y-300);
+    box-shadow: 0 8px 18px rgba(251, 191, 36, 0.35);
+  }
+  .wiggle-emoji {
+    display: inline-block;
+    animation: wiggle 2.4s ease-in-out infinite;
+    transform-origin: 70% 70%;
+  }
+  @keyframes wiggle {
+    0%, 8% { transform: rotate(0deg); }
+    16% { transform: rotate(-14deg); }
+    24% { transform: rotate(11deg); }
+    32% { transform: rotate(-8deg); }
+    40% { transform: rotate(5deg); }
+    48%, 100% { transform: rotate(0deg); }
+  }
+  .milestone-badge .badge-dot { animation: pulse 1.6s ease-in-out infinite; }
+  @media (max-width: 540px) {
+    .milestone-banner { padding: 44px 24px; box-shadow: 6px 6px 0 var(--y-400), 6px 6px 0 1px var(--ink); }
+    .milestone-chips { flex-direction: column; align-items: center; }
+  }
+
   /* ===== FLOW DIAGRAM ===== */
   .flow {
     background: var(--ink);
@@ -543,6 +663,43 @@
     color: var(--ink-2);
   }
   .formula-card .var-y { color: var(--y-700); font-weight: 600; }
+
+  /* ===== RESULTS TABLE ===== */
+  .results-wrap { max-width: 760px; margin: 0 auto; }
+  .results-card {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 20px;
+    padding: 36px 40px;
+    box-shadow: 10px 10px 0 var(--y-400), 10px 10px 0 1px var(--ink);
+  }
+  .results-label { text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; color: var(--y-700); margin-bottom: 6px; }
+  .results-caption { text-align: center; font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 24px; line-height: 1.5; }
+  .results-caption i { font-style: italic; }
+  .results-caption sub { font-size: 0.7em; }
+  .results-table-scroll { overflow-x: auto; }
+  .results-table { width: 100%; min-width: 460px; border-collapse: collapse; font-size: 13.5px; }
+  .results-table th { text-align: left; padding: 10px 12px; border-top: 2px solid var(--ink); border-bottom: 1.5px solid var(--ink); font-weight: 700; color: var(--ink); }
+  .results-table th i { font-style: italic; }
+  .results-table th sub { font-size: 0.75em; }
+  .results-table td { padding: 10px 12px; color: var(--ink-2); border-bottom: 1px solid var(--line); }
+  .results-table tbody tr:last-child td { border-bottom: 2px solid var(--ink); }
+  .results-table th.num, .results-table td.num { text-align: right; font-family: 'JetBrains Mono', monospace; }
+  .results-table td.delta { font-family: 'JetBrains Mono', monospace; font-weight: 700; text-align: right; color: #15803D; }
+  .results-table td.delta.zero { color: var(--ink-3); }
+  .results-note { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-3); line-height: 1.65; }
+  @media (max-width: 640px) {
+    .results-card { padding: 24px 18px; }
+    .results-table-scroll { overflow-x: visible; }
+    .results-table { min-width: 0; }
+    .results-table thead { display: none; }
+    .results-table, .results-table tbody, .results-table tr, .results-table td { display: block; width: 100%; }
+    .results-table tbody tr { border: 1.5px solid var(--ink); border-radius: 12px; padding: 4px 14px; margin-bottom: 10px; background: var(--y-50); }
+    .results-table tbody tr:last-child { margin-bottom: 0; border-bottom: 1.5px solid var(--ink); }
+    .results-table td { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--line); text-align: right; }
+    .results-table td:last-child { border-bottom: none; }
+    .results-table td::before { content: attr(data-label); font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-3); text-align: left; }
+  }
 
   /* ===== METRIC CARDS ===== */
   .metric-card {
@@ -1006,6 +1163,9 @@
   @media (prefers-reduced-motion: reduce) {
     .stagger-reveal > * { opacity:1 !important; transform:none !important; transition:none !important; }
   }
+  @media (prefers-reduced-motion: reduce) {
+    .wiggle-emoji, .milestone-badge .badge-dot { animation: none !important; }
+  }
 
   /* ===== DOCS OVERLAY ===== */
   .docs-overlay {
@@ -1187,6 +1347,7 @@
     .cta-box { padding: 48px 24px; box-shadow: 6px 6px 0 var(--ink); }
     .flow-branches { grid-template-columns: 1fr; }
     #control-sub-grid, #logs-feat-grid, #dashboard-feat-grid { grid-template-columns: 1fr !important; }
+    #pdf-diagram-embed { height: 360px !important; }
   }
 </style>
 </head>
@@ -1205,6 +1366,7 @@
       <li><a href="#control">Control</a></li>
       <li><a href="#logs">Logs</a></li>
       <li><a href="#dashboard">Dashboard</a></li>
+      <li><a href="#results">Results</a></li>
       <li><a href="#integrations">Integrations</a></li>
       <li><a href="#" id="docsNavBtn">Docs</a></li>
       <li><a href="pricing.html">Pricing</a></li>
@@ -1258,13 +1420,49 @@
   </div>
 </section>
 
+<!-- MILESTONE / CONFERENCE SUBMISSION -->
+<section>
+  <div class="milestone-banner" data-reveal="scale">
+    <div class="milestone-inner">
+      <div class="milestone-badge"><span class="badge-dot"></span> Milestone incoming</div>
+      <h2>We're submitting HydraPoT to an <span class="accent2">academic security conference</span>.</h2>
+      <p class="milestone-sub">Final touches are happening right now. Submission goes in by the end of July 2026, the result of months of building, breaking, and rebuilding this thing. If you're reading this before then, keep your fingers crossed for us.</p>
+      <div class="milestone-chips">
+        <div class="milestone-chip">🎓 Undergraduate research · PSU Phuket</div>
+        <div class="milestone-chip" id="milestoneCountdown">📅 Target: end of July 2026</div>
+        <div class="milestone-chip fingers"><span class="wiggle-emoji">🤞</span> Fingers crossed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var el = document.getElementById('milestoneCountdown');
+  if (!el) return;
+  var deadline = new Date('2026-07-31T23:59:59');
+  var now = new Date();
+  var msPerDay = 1000 * 60 * 60 * 24;
+  var daysLeft = Math.ceil((deadline - now) / msPerDay);
+  if (daysLeft > 1) {
+    el.textContent = '📅 ' + daysLeft + ' days until submission';
+  } else if (daysLeft === 1) {
+    el.textContent = '📅 Submitting tomorrow';
+  } else if (daysLeft === 0) {
+    el.textContent = '📅 Submitting today';
+  } else {
+    el.textContent = '📅 Submitted, now we wait';
+  }
+})();
+</script>
+
 <!-- ARCHITECTURE / FLOW -->
 <section id="architecture">
   <div class="flow" data-reveal="scale">
     <div class="section-head">
       <div class="eyebrow">Architecture</div>
       <h2>One command, three brains.</h2>
-      <p class="section-sub">Every keystroke flows through the Honey Router, which classifies the command by mechanism and dispatches it to the right agent. Separately, the FI Manager scores each command for impact and manages the LLM's context window — all in under 500 ms for routine commands.</p>
+      <p class="section-sub">Every keystroke flows through the Honey Router, which classifies the command by mechanism and dispatches it to the right agent. Separately, the FI Manager scores each command for impact and manages the LLM's context window, all in under 500 ms for routine commands.</p>
     </div>
 
     <div class="flow-diagram">
@@ -1310,7 +1508,7 @@
     <div class="section-head">
       <div class="eyebrow">Why HydraPoT</div>
       <h2>Static traps lie.<br>API-only traps drain your wallet.</h2>
-      <p class="section-sub">HydraPoT routes every command to the cheapest agent that can still fool the attacker — spending zero cloud credits on simple recon and saving GPT-4o mini power for when it actually matters.</p>
+      <p class="section-sub">HydraPoT routes every command to the cheapest agent that can still fool the attacker, spending zero cloud credits on simple recon and saving GPT-4o mini power for when it actually matters.</p>
     </div>
 
     <div class="vs-grid stagger-reveal">
@@ -1336,7 +1534,7 @@
         <ul class="vs-list">
           <li class="vs-item pro"><span class="vi-pro">✓</span>Flexible, handles novel commands</li>
           <li class="vs-item pro"><span class="vi-pro">✓</span>Creative &amp; context-aware responses</li>
-          <li class="vs-item con"><span class="vi-con">✗</span>Every command hits the API — costs add up fast</li>
+          <li class="vs-item con"><span class="vi-con">✗</span>Every command hits the API, costs add up fast</li>
           <li class="vs-item con"><span class="vi-con">✗</span>No memory between commands</li>
           <li class="vs-item con"><span class="vi-con">✗</span>Locked to one API vendor</li>
         </ul>
@@ -1348,12 +1546,12 @@
         <div class="vs-label">Intelligent routing</div>
         <div class="vs-title">Best of both worlds</div>
         <ul class="vs-list">
-          <li class="vs-item pro"><span class="vi-pro">✓</span>Cowrie handles routine recon — fast, free</li>
-          <li class="vs-item pro"><span class="vi-pro">✓</span>On-device LLM for complex commands — no API cost</li>
+          <li class="vs-item pro"><span class="vi-pro">✓</span>Cowrie handles routine recon: fast, free</li>
+          <li class="vs-item pro"><span class="vi-pro">✓</span>On-device LLM for complex commands: no API cost</li>
           <li class="vs-item pro"><span class="vi-pro">✓</span>GPT-4o mini only when the attacker goes deep</li>
           <li class="vs-item pro"><span class="vi-pro">✓</span>Full session context across all three agents</li>
           <li class="vs-item pro"><span class="vi-pro">✓</span>Handles base64, reverse shells, multi-pipe payloads</li>
-          <li class="vs-item pro"><span class="vi-pro">✓</span>BYO LLM &amp; SIEM — zero vendor lock-in</li>
+          <li class="vs-item pro"><span class="vi-pro">✓</span>BYO LLM &amp; SIEM: zero vendor lock-in</li>
         </ul>
       </div>
 
@@ -1366,7 +1564,7 @@
   <div class="section-head" data-reveal>
     <div class="eyebrow">Three agents</div>
     <h2>Each one plays its role.</h2>
-    <p class="section-sub">The Honey Router picks the cheapest agent that can still produce a believable response — saving 97% of cloud spend. Cowrie handles routine recon. LLMs take over when context and creativity are the only thing keeping the session convincing.</p>
+    <p class="section-sub">The Honey Router picks the cheapest agent that can still produce a believable response, saving 97% of cloud spend. Cowrie handles routine recon. LLMs take over when context and creativity are the only thing keeping the session convincing.</p>
   </div>
 
   <div class="agents">
@@ -1386,7 +1584,7 @@
       <div class="agent-num">02 / ondevice_agent.py</div>
       <div class="agent-icon">◉</div>
       <div class="agent-title">On-Device LLM</div>
-      <div class="agent-desc">Qwen2.5-Coder-7B running locally — no API calls, zero latency tax. Carries full session state so fake files, services, and processes stay consistent across commands.</div>
+      <div class="agent-desc">Qwen2.5-Coder-7B running locally: no API calls, zero latency tax. Carries full session state so fake files, services, and processes stay consistent across commands.</div>
       <ul class="agent-handles">
         <li>./script.sh execution</li>
         <li>systemctl status</li>
@@ -1398,7 +1596,7 @@
       <div class="agent-num">03 / cloud_agent.py</div>
       <div class="agent-icon">☁</div>
       <div class="agent-title">Cloud Fallback</div>
-      <div class="agent-desc">GPT-4o mini via API. Reserved for the commands that would fool nothing else — obfuscated payloads, base64 blobs, reverse shells, and multi-stage exploits. The heaviest weapon in the stack, deployed only when the situation demands it.</div>
+      <div class="agent-desc">GPT-4o mini via API. Reserved for the commands that would fool nothing else: obfuscated payloads, base64 blobs, reverse shells, and multi-stage exploits. The heaviest weapon in the stack, deployed only when the situation demands it.</div>
       <ul class="agent-handles">
         <li>eval / bash -c payloads</li>
         <li>pipe-to-interpreter</li>
@@ -1484,7 +1682,7 @@
 FI_weight      = fi / 4
 Recency_weight = 1 / (1 + age_min)</pre>
         <p style="font-size: 13px; color: var(--ink-2); margin-top: 16px; line-height: 1.6;">
-          When the FI ≥ 2 buffer hits 10 events, the row with the lowest retention is dropped. High-FI commands survive longer — recent recon falls off first, dangerous calls stick around as context.
+          When the FI ≥ 2 buffer hits 10 events, the row with the lowest retention is dropped. High-FI commands survive longer: recent recon falls off first, dangerous calls stick around as context.
         </p>
       </div>
     </div>
@@ -1547,7 +1745,7 @@ Recency_weight = 1 / (1 + age_min)</pre>
         <div class="rule-feat">
           <div class="rule-feat-icon">⚙</div>
           <div class="rule-feat-title">Pattern matching</div>
-          <div class="rule-feat-desc">Glob, regex, entropy threshold, pipe detection — match exactly what you care about.</div>
+          <div class="rule-feat-desc">Glob, regex, entropy threshold, pipe detection: match exactly what you care about.</div>
           <span class="rule-tag">match: command / pattern / entropy_gt</span>
         </div>
 
@@ -1561,7 +1759,7 @@ Recency_weight = 1 / (1 + age_min)</pre>
         <div class="rule-feat">
           <div class="rule-feat-icon">⇄</div>
           <div class="rule-feat-title">Agent override</div>
-          <div class="rule-feat-desc">Force a specific agent for any match — bypass the router entirely for rules you're confident about.</div>
+          <div class="rule-feat-desc">Force a specific agent for any match. Bypass the router entirely for rules you're confident about.</div>
           <span class="rule-tag">agent: cowrie / ondevice / cloud</span>
         </div>
 
@@ -1592,7 +1790,7 @@ Recency_weight = 1 / (1 + age_min)</pre>
         <div style="font-size: 28px; flex-shrink: 0;">↻</div>
         <div>
           <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">Hot-reload</div>
-          <div style="font-size: 13px; color: var(--ink-3); font-family: 'JetBrains Mono', monospace;">Drop a new <code>.yaml</code> into <code>rules/</code> while the honeypot is live. It picks it up on the next command — no restart, no dropped sessions.</div>
+          <div style="font-size: 13px; color: var(--ink-3); font-family: 'JetBrains Mono', monospace;">Drop a new <code>.yaml</code> into <code>rules/</code> while the honeypot is live. It picks it up on the next command: no restart, no dropped sessions.</div>
         </div>
       </div>
     </div>
@@ -1646,7 +1844,7 @@ Recency_weight = 1 / (1 + age_min)</pre>
   <div class="section-head" data-reveal>
     <div class="eyebrow">Configuration</div>
     <h2>You control every decision.</h2>
-    <p class="section-sub">Toggle agents on or off, remap which FI level routes where, tune the logging threshold — the config on the left updates live as you click.</p>
+    <p class="section-sub">Toggle agents on or off, remap which FI level routes where, tune the logging threshold. The config on the left updates live as you click.</p>
   </div>
 
   <div id="control-grid" style="display:grid; grid-template-columns:1.15fr 1fr; gap:48px; align-items:start;">
@@ -1750,7 +1948,7 @@ Recency_weight = 1 / (1 + age_min)</pre>
 
       <!-- FI Routing card -->
       <div class="ctrl-card">
-        <div class="ctrl-card-lbl">FI Routing <span style="font-size:10px; color:var(--ink-3); font-family:'JetBrains Mono',monospace; text-transform:none; letter-spacing:0; font-weight:400;">— click badge to cycle</span></div>
+        <div class="ctrl-card-lbl">FI Routing <span style="font-size:10px; color:var(--ink-3); font-family:'JetBrains Mono',monospace; text-transform:none; letter-spacing:0; font-weight:400;">(click badge to cycle)</span></div>
         <div style="display:flex; flex-direction:column; gap:8px;">
 
           <div class="ctrl-fi-row">
@@ -1880,7 +2078,7 @@ Recency_weight = 1 / (1 + age_min)</pre>
       <div class="eyebrow">Setup</div>
       <h2>Up and running<br>in three commands.</h2>
       <p class="section-sub" style="text-align:left; margin:0 0 32px;">
-        One interactive wizard configures every detail — hostname, LLM, credentials, SIEM endpoint. No YAML hand-editing, no guesswork. Your honeypot is live before your coffee gets cold.
+        One interactive wizard configures every detail: hostname, LLM, credentials, SIEM endpoint. No YAML hand-editing, no guesswork. Your honeypot is live before your coffee gets cold.
       </p>
 
       <ul style="list-style:none; display:flex; flex-direction:column; gap:18px; margin-bottom:36px;">
@@ -1901,7 +2099,7 @@ Recency_weight = 1 / (1 + age_min)</pre>
         <li style="display:flex; align-items:flex-start; gap:16px;">
           <div style="flex-shrink:0; width:36px; height:36px; background:var(--ink); border:2px solid var(--ink); border-radius:10px; display:grid; place-items:center; font-family:'JetBrains Mono',monospace; font-weight:800; font-size:14px; color:var(--y-400);">3</div>
           <div>
-            <div style="font-weight:700; font-size:15px; margin-bottom:3px;">Run <code style="font-family:'JetBrains Mono',monospace; font-size:13px; background:var(--y-100); padding:1px 6px; border-radius:4px;">hp run</code> — done</div>
+            <div style="font-weight:700; font-size:15px; margin-bottom:3px;">Run <code style="font-family:'JetBrains Mono',monospace; font-size:13px; background:var(--y-100); padding:1px 6px; border-radius:4px;">hp run</code>, done</div>
             <div style="font-size:13px; color:var(--ink-3); font-family:'JetBrains Mono',monospace;">All three agents spin up. Attackers start connecting. You start collecting intelligence.</div>
           </div>
         </li>
@@ -1989,7 +2187,7 @@ Recency_weight = 1 / (1 + age_min)</pre>
   <div class="section-head" data-reveal>
     <div class="eyebrow">Session Replay</div>
     <h2>Every attack.<br>Every command. On record.</h2>
-    <p class="section-sub">Pick any session from the list and investigate it instantly — timestamped, FI-scored, and agent-tagged command by command. Built for SOC analysts who need answers fast.</p>
+    <p class="section-sub">Pick any session from the list and investigate it instantly: timestamped, FI-scored, and agent-tagged, command by command. Built for SOC analysts who need answers fast.</p>
   </div>
 
   <!-- Master-detail -->
@@ -2130,9 +2328,9 @@ Recency_weight = 1 / (1 + age_min)</pre>
   <!-- Feature cards -->
   <div id="logs-feat-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:20px;" class="stagger-reveal">
     <div class="rule-feat"><div class="rule-feat-icon">⊞</div><div class="rule-feat-title">Session browser</div><div class="rule-feat-desc">Navigate 791+ recorded sessions. Click any row to load its replay instantly.</div><span class="rule-tag">hp logs --session &lt;id&gt;</span></div>
-    <div class="rule-feat"><div class="rule-feat-icon">▶</div><div class="rule-feat-title">Typewriter replay</div><div class="rule-feat-desc">Each command types out live — press Next or Enter to step through the attacker's exact sequence.</div><span class="rule-tag">REPLAY START</span></div>
+    <div class="rule-feat"><div class="rule-feat-icon">▶</div><div class="rule-feat-title">Typewriter replay</div><div class="rule-feat-desc">Each command types out live. Press Next or Enter to step through the attacker's exact sequence.</div><span class="rule-tag">REPLAY START</span></div>
     <div class="rule-feat"><div class="rule-feat-icon">◈</div><div class="rule-feat-title">FI-filtered view</div><div class="rule-feat-desc">Skip recon noise. Filter to FI ≥ 2 and land straight on the commands that mattered.</div><span class="rule-tag">hp logs --fi 4</span></div>
-    <div class="rule-feat"><div class="rule-feat-icon">⇄</div><div class="rule-feat-title">Agent attribution</div><div class="rule-feat-desc">Every line shows COWRIE, ON-DEVICE, or CLOUD — and exactly how long each took to respond.</div><span class="rule-tag">on_device / cloud / cowrie</span></div>
+    <div class="rule-feat"><div class="rule-feat-icon">⇄</div><div class="rule-feat-title">Agent attribution</div><div class="rule-feat-desc">Every line shows COWRIE, ON-DEVICE, or CLOUD, and exactly how long each took to respond.</div><span class="rule-tag">on_device / cloud / cowrie</span></div>
   </div>
 
   <script>
@@ -2155,7 +2353,7 @@ Recency_weight = 1 / (1 + age_min)</pre>
         ]
       },
       low: {
-        id:'20260630_134656', cmds:6, imp:0, peak:1, peakLbl:'Low — Recon only', peakCol:'#9AE6B4',
+        id:'20260630_134656', cmds:6, imp:0, peak:1, peakLbl:'Low · Recon only', peakCol:'#9AE6B4',
         start:'2026-06-30 13:46:58', end:'2026-06-30 13:47:22',
         agents:'<span style="color:#9AE6B4;">cowrie:6</span>',
         commands:[
@@ -2223,7 +2421,7 @@ Recency_weight = 1 / (1 + age_min)</pre>
       S.idx = 0; S.typing = false;
 
       var d = S.data;
-      document.getElementById('sess-detail-title').textContent = d.id + ' — replay';
+      document.getElementById('sess-detail-title').textContent = d.id + ' · replay';
 
       // info grid
       document.getElementById('sess-info-area').style.display = '';
@@ -2231,7 +2429,7 @@ Recency_weight = 1 / (1 + age_min)</pre>
         '<div><span style="color:rgba(232,219,198,.5);">Session: </span><span style="color:#00BFFF;font-weight:700;">'+d.id+'</span></div>'
         +'<div><span style="color:rgba(232,219,198,.5);">Commands: </span><span style="color:#E8DBC6;">'+d.cmds+'</span></div>'
         +'<div><span style="color:rgba(232,219,198,.5);">Impactful (FI≥2): </span><span style="color:#E8DBC6;">'+d.imp+'</span></div>'
-        +'<div><span style="color:rgba(232,219,198,.5);">Peak FI: </span><span style="color:'+d.peakCol+';font-weight:700;">'+d.peak+' — '+d.peakLbl+'</span></div>'
+        +'<div><span style="color:rgba(232,219,198,.5);">Peak FI: </span><span style="color:'+d.peakCol+';font-weight:700;">'+d.peak+' · '+d.peakLbl+'</span></div>'
         +'<div style="margin-top:5px;"><span style="color:rgba(232,219,198,.5);">Start: </span><span style="color:#E8DBC6;">'+d.start+'</span></div>'
         +'<div style="margin-top:5px;"><span style="color:rgba(232,219,198,.5);">End: </span><span style="color:#E8DBC6;">'+d.end+'</span></div>'
         +'<div style="margin-top:5px;grid-column:span 2;"><span style="color:rgba(232,219,198,.5);">Agents: </span>'+d.agents+'</div>';
@@ -2366,7 +2564,7 @@ Recency_weight = 1 / (1 + age_min)</pre>
   <div class="section-head" data-reveal>
     <div class="eyebrow">Threat Intelligence Platform</div>
     <h2>Not just a honeypot.<br>A full SOC weapon.</h2>
-    <p class="section-sub">HydraPoT ships with a built-in SIEM-grade dashboard — purpose-built for SOC teams who need attacker intelligence, not just logs. One platform to capture, classify, correlate, and act.</p>
+    <p class="section-sub">HydraPoT ships with a built-in SIEM-grade dashboard, purpose-built for SOC teams who need attacker intelligence, not just logs. One platform to capture, classify, correlate, and act.</p>
   </div>
 
   <!-- Full-width screenshot -->
@@ -2388,7 +2586,7 @@ Recency_weight = 1 / (1 + age_min)</pre>
     <div class="rule-feat">
       <div class="rule-feat-icon">⬡</div>
       <div class="rule-feat-title">Real-time monitoring</div>
-      <div class="rule-feat-desc">Every session, command, FI score, and agent decision surfaces live — no query required.</div>
+      <div class="rule-feat-desc">Every session, command, FI score, and agent decision surfaces live: no query required.</div>
     </div>
 
     <div class="rule-feat">
@@ -2406,7 +2604,7 @@ Recency_weight = 1 / (1 + age_min)</pre>
     <div class="rule-feat">
       <div class="rule-feat-icon">🔔</div>
       <div class="rule-feat-title">SIEM-grade alerting</div>
-      <div class="rule-feat-desc">Critical events fire enriched alerts tagged by severity and FI level — forward out or keep them in the built-in dashboard.</div>
+      <div class="rule-feat-desc">Critical events fire enriched alerts tagged by severity and FI level. Forward them out, or keep them in the built-in dashboard.</div>
     </div>
 
   </div>
@@ -2416,11 +2614,52 @@ Recency_weight = 1 / (1 + age_min)</pre>
     <div>
       <div style="font-size:15px; font-weight:700; margin-bottom:4px;">Developed by Kamolchanok Saengtong</div>
       <div style="font-size:13px; color:var(--ink-3); line-height:1.65;">
-        Undergraduate student at the <strong>College of Computing (CoC)</strong>, Prince of Songkla University, Phuket Campus. HydraPoT is an academic research project exploring multi-agent honeypot architecture and threat intelligence — built to go beyond passive trapping and give defenders real, actionable insight into attacker behaviour.
+        Undergraduate student at the <strong>College of Computing (CoC)</strong>, Prince of Songkla University, Phuket Campus. HydraPoT is an academic research project exploring multi-agent honeypot architecture and threat intelligence, built to go beyond passive trapping and give defenders real, actionable insight into attacker behaviour.
       </div>
     </div>
   </div>
 
+</section>
+
+<!-- RESULTS -->
+<section id="results">
+  <div class="section-head" data-reveal>
+    <div class="eyebrow">Evaluation</div>
+    <h2>Context survives the handoff.</h2>
+    <p class="section-sub">FI-routed sessions bounce between Cowrie, the on-device model, and the cloud model mid-conversation. Without shared context, each agent forgets what the attacker just did. We measured how often the reader agent correctly recalled state the creator agent had set, comparing our cross-agent session memory on vs. off.</p>
+  </div>
+
+  <div class="results-wrap" data-reveal="scale">
+    <div class="results-card">
+      <div class="results-label">Table I</div>
+      <div class="results-caption">Context Preservation Success Rate by Agent Pair<br>(<i>SR</i><sub>off</sub> vs. <i>SR</i><sub>on</sub>)</div>
+      <div class="results-table-scroll">
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>Creator Agent</th>
+            <th>Reader Agent</th>
+            <th class="num"><i>SR</i><sub>off</sub> (%)</th>
+            <th class="num"><i>SR</i><sub>on</sub> (%)</th>
+            <th class="num">Δ (pp)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td data-label="Creator">Cowrie</td><td data-label="Reader">Cloud</td><td class="num" data-label="SR off (%)">35.53</td><td class="num" data-label="SR on (%)">100.00</td><td class="delta" data-label="Δ (pp)">+64.47</td></tr>
+          <tr><td data-label="Creator">On-device</td><td data-label="Reader">Cloud</td><td class="num" data-label="SR off (%)">35.53</td><td class="num" data-label="SR on (%)">100.00</td><td class="delta" data-label="Δ (pp)">+64.47</td></tr>
+          <tr><td data-label="Creator">On-device</td><td data-label="Reader">On-device</td><td class="num" data-label="SR off (%)">22.37</td><td class="num" data-label="SR on (%)">89.47</td><td class="delta" data-label="Δ (pp)">+67.10</td></tr>
+          <tr><td data-label="Creator">Cloud</td><td data-label="Reader">Cloud</td><td class="num" data-label="SR off (%)">36.84</td><td class="num" data-label="SR on (%)">97.37</td><td class="delta" data-label="Δ (pp)">+60.53</td></tr>
+          <tr><td data-label="Creator">Cowrie</td><td data-label="Reader">On-device</td><td class="num" data-label="SR off (%)">21.05</td><td class="num" data-label="SR on (%)">80.26</td><td class="delta" data-label="Δ (pp)">+59.21</td></tr>
+          <tr><td data-label="Creator">Cloud</td><td data-label="Reader">On-device</td><td class="num" data-label="SR off (%)">22.37</td><td class="num" data-label="SR on (%)">77.63</td><td class="delta" data-label="Δ (pp)">+55.26</td></tr>
+          <tr><td data-label="Creator">Cowrie</td><td data-label="Reader">Cowrie</td><td class="num" data-label="SR off (%)">55.26</td><td class="num" data-label="SR on (%)">55.26</td><td class="delta zero" data-label="Δ (pp)">+0.00</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="results-note">
+        Every pair that hands a session off <em>into</em> the cloud or on-device agent gains 55–67 points once shared session memory is on, reaching a perfect 100% for both Cowrie→Cloud and On-device→Cloud. Cowrie→Cowrie is unaffected (+0.00) because Cowrie has no LLM-side context to preserve in the first place.
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- INTEGRATIONS -->
@@ -2672,7 +2911,7 @@ Commands:
           </tr>
           <tr>
             <td><code>hp config</code></td>
-            <td>Prints the current resolved configuration — active agents, model IDs, SIEM endpoint, FI thresholds, and rule files loaded.</td>
+            <td>Prints the current resolved configuration: active agents, model IDs, SIEM endpoint, FI thresholds, and rule files loaded.</td>
             <td><code>hp config</code></td>
           </tr>
           <tr>
@@ -2697,7 +2936,7 @@ Commands:
       <table class="doc-table">
         <thead><tr><th>File</th><th>Contains</th></tr></thead>
         <tbody>
-          <tr><td><code>session_log.json</code></td><td>Every command from every session — timestamp, raw input, FI score, agent used, response.</td></tr>
+          <tr><td><code>session_log.json</code></td><td>Every command from every session: timestamp, raw input, FI score, agent used, response.</td></tr>
           <tr><td><code>impactful_log.json</code></td><td>FI ≥ 2 commands only. Used for threat intel review and SIEM forwarding.</td></tr>
         </tbody>
       </table>
@@ -2707,25 +2946,40 @@ Commands:
     <div class="doc-panel" id="doc-arch">
       <p class="doc-p">Every SSH command passes through a four-stage pipeline before a response reaches the attacker.</p>
 
+      <div style="border-radius:16px; overflow:hidden; border:2px solid var(--ink); box-shadow: 8px 8px 0 var(--y-400), 8px 8px 0 1px var(--ink); margin-bottom:28px;">
+        <div style="background:#2A2118; padding:12px 16px; display:flex; align-items:center; justify-content:space-between; gap:8px; border-bottom:1px solid rgba(255,255,255,0.08);">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span class="term-dot dot-r"></span>
+            <span class="term-dot dot-y"></span>
+            <span class="term-dot dot-g"></span>
+            <span style="color:rgba(255,255,255,0.45); font-family:'JetBrains Mono',monospace; font-size:12px; margin-left:10px;">HydraPoT diagram.pdf</span>
+          </div>
+          <a href="HydraPoT%20diagram.pdf" target="_blank" rel="noopener" style="color:var(--y-300); font-family:'JetBrains Mono',monospace; font-size:11px; text-decoration:none; font-weight:700; white-space:nowrap;">Open full size ↗</a>
+        </div>
+        <object id="pdf-diagram-embed" data="HydraPoT%20diagram.pdf" type="application/pdf" style="width:100%; height:560px; display:block; border:none;">
+          <p style="padding:24px; font-size:13px; color:var(--ink-3);">Your browser can't preview PDFs inline. <a href="HydraPoT%20diagram.pdf" target="_blank" rel="noopener" style="color:var(--y-700); font-weight:700;">Open the diagram directly →</a></p>
+        </object>
+      </div>
+
       <div class="doc-flow">
         <div class="doc-flow-row">
           <div class="doc-flow-spine"><div class="doc-flow-dot"></div><div class="doc-flow-line"></div></div>
           <div class="doc-flow-body">
-            <div class="doc-flow-title">① Attacker connects — SSH :22</div>
+            <div class="doc-flow-title">① Attacker connects: SSH :22</div>
             <div class="doc-flow-sub">Raw paramiko session opens. Every keystroke is captured and forwarded into the pipeline. The attacker sees a convincing Ubuntu 22.04 banner.</div>
           </div>
         </div>
         <div class="doc-flow-row">
           <div class="doc-flow-spine"><div class="doc-flow-dot"></div><div class="doc-flow-line"></div></div>
           <div class="doc-flow-body">
-            <div class="doc-flow-title">② Honey Router — classify &amp; route</div>
+            <div class="doc-flow-title">② Honey Router: classify &amp; route</div>
             <div class="doc-flow-sub">Checks cloud escalation conditions first (entropy, obfuscation, pipe-to-shell). Then pattern-matches for Cowrie or on-device. Fallback is always on-device. Assigns an FI score 0–4.</div>
           </div>
         </div>
         <div class="doc-flow-row">
           <div class="doc-flow-spine"><div class="doc-flow-dot"></div><div class="doc-flow-line"></div></div>
           <div class="doc-flow-body">
-            <div class="doc-flow-title">③ FI Manager — score &amp; remember</div>
+            <div class="doc-flow-title">③ FI Manager: score &amp; remember</div>
             <div class="doc-flow-sub">Stores FI ≥ 2 commands in a capped memory buffer (max 10 events). When full, drops the lowest-retention entry using: Retention = (0.7 × FI_weight) + (0.3 × Recency_weight). High-impact commands stay in context longer.</div>
           </div>
         </div>
@@ -2734,9 +2988,9 @@ Commands:
           <div class="doc-flow-body">
             <div class="doc-flow-title">④ Agent responds</div>
             <div class="doc-flow-sub">
-              <strong style="color:var(--ink);">cowrie_agent</strong> — Paramiko SSH into real Cowrie container. FI 0–1.<br>
-              <strong style="color:var(--ink);">ondevice_agent</strong> — Qwen2.5-Coder-7B locally. FI 2–3. Uses session history.<br>
-              <strong style="color:var(--ink);">cloud_agent</strong> — GPT-4o mini via API. FI 4 + obfuscated commands.
+              <strong style="color:var(--ink);">cowrie_agent</strong>: Paramiko SSH into real Cowrie container. FI 0–1.<br>
+              <strong style="color:var(--ink);">ondevice_agent</strong>: Qwen2.5-Coder-7B locally. FI 2–3. Uses session history.<br>
+              <strong style="color:var(--ink);">cloud_agent</strong>: GPT-4o mini via API. FI 4 + obfuscated commands.
             </div>
           </div>
         </div>
@@ -2796,7 +3050,7 @@ FI_weight      = fi_score / 4
 Recency_weight = 1 / (1 + age_in_minutes)
 
 <span class="cmt"># Result: high-impact, recent commands survive longest.</span>
-<span class="cmt"># Old recon (FI 0-1) is never stored — it doesn't compete.</span></div>
+<span class="cmt"># Old recon (FI 0-1) is never stored. It doesn't compete.</span></div>
 
       <div class="doc-h3">What gets logged where</div>
       <table class="doc-table">
@@ -2811,14 +3065,14 @@ Recency_weight = 1 / (1 + age_in_minutes)
 
     <!-- ── ROUTER LOGIC ── -->
     <div class="doc-panel" id="doc-router">
-      <p class="doc-p">The Honey Router evaluates every command through a strict priority chain. Cloud escalation is checked <strong>first</strong> — before any pattern matching — to ensure no obfuscated payload ever leaks to a weaker agent.</p>
+      <p class="doc-p">The Honey Router evaluates every command through a strict priority chain. Cloud escalation is checked <strong>first</strong>, before any pattern matching, to ensure no obfuscated payload ever leaks to a weaker agent.</p>
 
       <div class="doc-h3">Decision order</div>
       <table class="doc-table">
         <thead><tr><th>Priority</th><th>Condition</th><th>Routes to</th></tr></thead>
         <tbody>
           <tr>
-            <td style="font-weight:700; color:var(--y-800);">1 — Cloud check</td>
+            <td style="font-weight:700; color:var(--y-800);">1: Cloud check</td>
             <td>
               Shannon entropy &gt; 4.8 <strong>AND</strong> length ≥ 90<br>
               <em>OR</em> operator count ≥ 2<br>
@@ -2829,17 +3083,17 @@ Recency_weight = 1 / (1 + age_in_minutes)
             <td><strong>cloud_agent</strong></td>
           </tr>
           <tr>
-            <td style="font-weight:700;">2 — Cowrie patterns</td>
+            <td style="font-weight:700;">2: Cowrie patterns</td>
             <td>Basic read/display commands, file operations, package install, <code>sudo</code>, download tools (<code>wget</code>, <code>curl</code> without pipe)</td>
             <td><strong>cowrie_agent</strong></td>
           </tr>
           <tr>
-            <td style="font-weight:700;">3 — On-device patterns</td>
+            <td style="font-weight:700;">3: On-device patterns</td>
             <td>Script execution (<code>./</code>, <code>bash script.sh</code>), service status queries (<code>systemctl status</code>), version queries (<code>--version</code>, <code>-v</code>)</td>
             <td><strong>ondevice_agent</strong></td>
           </tr>
           <tr>
-            <td style="font-weight:700; color:var(--ink-3);">4 — Fallback</td>
+            <td style="font-weight:700; color:var(--ink-3);">4: Fallback</td>
             <td>Anything not matched by rules 1–3</td>
             <td><strong>ondevice_agent</strong></td>
           </tr>
@@ -2852,7 +3106,7 @@ Recency_weight = 1 / (1 + age_in_minutes)
 
     <!-- ── RULE ENGINE ── -->
     <div class="doc-panel" id="doc-rules">
-      <p class="doc-p">Drop a <code style="font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--y-100);padding:1px 6px;border-radius:4px;">.yaml</code> file into the <code style="font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--y-100);padding:1px 6px;border-radius:4px;">rules/</code> directory while the honeypot is live. Rules are hot-reloaded on the next incoming command — no restart needed.</p>
+      <p class="doc-p">Drop a <code style="font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--y-100);padding:1px 6px;border-radius:4px;">.yaml</code> file into the <code style="font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--y-100);padding:1px 6px;border-radius:4px;">rules/</code> directory while the honeypot is live. Rules are hot-reloaded on the next incoming command: no restart needed.</p>
 
       <div class="doc-h3">Full rule structure</div>
       <div class="doc-code"><span class="cmt"># rules/example.yaml</span>
@@ -2877,7 +3131,7 @@ Recency_weight = 1 / (1 + age_in_minutes)
         <thead><tr><th>Key</th><th>Type</th><th>Description</th></tr></thead>
         <tbody>
           <tr><td><code>command</code></td><td>glob string</td><td>Glob pattern matched against the full raw command string.</td></tr>
-          <tr><td><code>pattern</code></td><td>glob string</td><td>Secondary glob — useful for matching filenames or arguments within a command.</td></tr>
+          <tr><td><code>pattern</code></td><td>glob string</td><td>Secondary glob, useful for matching filenames or arguments within a command.</td></tr>
           <tr><td><code>fi_min</code></td><td>integer 0–4</td><td>Rule only fires if the computed FI score is ≥ this value.</td></tr>
           <tr><td><code>entropy_gt</code></td><td>float</td><td>Rule only fires if Shannon entropy of the command exceeds this threshold.</td></tr>
           <tr><td><code>pipe_to_shell</code></td><td>boolean</td><td>Rule only fires if the command contains a pipe into a shell (<code>| bash</code>, <code>| sh</code>).</td></tr>
@@ -2893,7 +3147,7 @@ Recency_weight = 1 / (1 + age_in_minutes)
           <tr><td><code>inject</code></td><td>string</td><td>Literal string injected verbatim. Supports <code>&#123;&#123;filename&#125;&#125;</code>, <code>&#123;&#123;ip&#125;&#125;</code>, <code>&#123;&#123;user&#125;&#125;</code> variables.</td></tr>
           <tr><td><code>exit_code</code></td><td>integer</td><td>Sets the shell exit code returned after the response.</td></tr>
           <tr><td><code>delay_ms</code></td><td>integer</td><td>Adds realistic latency before the response is sent.</td></tr>
-          <tr><td><code>loop</code></td><td>integer</td><td>Repeats the response N times — useful for fake password-prompt loops.</td></tr>
+          <tr><td><code>loop</code></td><td>integer</td><td>Repeats the response N times, useful for fake password-prompt loops.</td></tr>
           <tr><td><code>fi_override</code></td><td>integer 0–4</td><td>Overrides the computed FI score for this command's memory and logging treatment.</td></tr>
           <tr><td><code>alert</code></td><td>string</td><td>Tags the SIEM event with a custom severity label on match.</td></tr>
         </tbody>
@@ -2909,7 +3163,7 @@ Recency_weight = 1 / (1 + age_in_minutes)
           <tr>
             <td><code>ONDEVICE_MODEL</code></td>
             <td><code>Qwen/Qwen2.5-Coder-7B-Instruct-GGUF</code></td>
-            <td>HuggingFace model ID or local path. Swap to any compatible checkpoint — session state and FI routing wire up automatically.</td>
+            <td>HuggingFace model ID or local path. Swap to any compatible checkpoint, and session state and FI routing wire up automatically.</td>
           </tr>
           <tr>
             <td><code>HYDRAPOT_SIEM_ENDPOINT</code></td>
@@ -2924,7 +3178,7 @@ Recency_weight = 1 / (1 + age_in_minutes)
           <tr>
             <td><code>CLOUD_API_URL</code></td>
             <td><code>https://api.openai.com/v1</code></td>
-            <td>Cloud LLM endpoint. Accepts any OpenAI-compatible URL — point it at your own hosted model if needed.</td>
+            <td>Cloud LLM endpoint. Accepts any OpenAI-compatible URL, so you can point it at your own hosted model if needed.</td>
           </tr>
           <tr>
             <td><code>HONEYPOT_PORT</code></td>
@@ -2948,7 +3202,7 @@ Recency_weight = 1 / (1 + age_in_minutes)
           <tr><td>Cloud LLM</td><td>GPT-4o mini via API (OpenAI-compatible)</td></tr>
           <tr><td>SSH transport</td><td>Paramiko</td></tr>
           <tr><td>Language</td><td>Python 3.10+</td></tr>
-          <tr><td>Session logs</td><td>JSON — <code>session_log.json</code>, <code>impactful_log.json</code></td></tr>
+          <tr><td>Session logs</td><td>JSON: <code>session_log.json</code>, <code>impactful_log.json</code></td></tr>
         </tbody>
       </table>
 
@@ -2960,7 +3214,7 @@ Recency_weight = 1 / (1 + age_in_minutes)
         </div>
         <div class="doc-limit-card">
           <h4>bash_history sync</h4>
-          <p>History sync between agents has limitations — the on-device LLM carries session context, but Cowrie's own history is not shared back.</p>
+          <p>History sync between agents has limitations. The on-device LLM carries session context, but Cowrie's own history is not shared back.</p>
         </div>
         <div class="doc-limit-card">
           <h4>Token estimation</h4>
@@ -2972,7 +3226,7 @@ Recency_weight = 1 / (1 + age_in_minutes)
         </div>
       </div>
 
-      <div class="doc-h3">Roadmap — v0.23.0-Beta</div>
+      <div class="doc-h3">Roadmap · v0.23.0-Beta</div>
       <div>
         <div class="doc-road-item">
           <span class="doc-road-tag">v0.23.0</span>
@@ -3041,6 +3295,7 @@ $ python main.py</pre>
     <div>
       <h4>Project</h4>
       <a href="https://github.com/Kamolchanok-Saengtong/HydraPoT" target="_blank" rel="noopener">GitHub</a>
+      <a href="#results">Results</a>
       <a href="#">Paper</a>
       <a href="#">Dataset</a>
       <a href="#">Contact</a>
