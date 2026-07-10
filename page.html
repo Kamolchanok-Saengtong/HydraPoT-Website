@@ -2658,6 +2658,34 @@ Recency_weight = 1 / (1 + age_min)</pre>
       <div class="results-note">
         Phase II Experiment Results
     </div>
+    </div>
+
+    <div class="results-card" style="margin-top:32px;">
+      <div class="results-label">Table II</div>
+      <div class="results-caption">Response Similarity Metrics by Arm</div>
+      <div class="results-table-scroll">
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>Arm</th>
+            <th class="num">BERTScore F1</th>
+            <th class="num">Cosine</th>
+            <th class="num">Sequence</th>
+            <th class="num">Levenshtein</th>
+            <th class="num">Jaro-Winkler</th>
+            <th class="num">BLEU</th>
+            <th class="num">Exact match</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td data-label="Arm">Pure Cowrie</td><td class="num" data-label="BERTScore F1">0.720</td><td class="num" data-label="Cosine">0.775</td><td class="num" data-label="Sequence">0.790</td><td class="num" data-label="Levenshtein">0.775</td><td class="num" data-label="Jaro-Winkler">0.854</td><td class="num" data-label="BLEU">0.713</td><td class="num" data-label="Exact match">67.8%</td></tr>
+          <tr><td data-label="Arm">Pure On-device LLM</td><td class="num" data-label="BERTScore F1">0.761</td><td class="num" data-label="Cosine">0.790</td><td class="num" data-label="Sequence">0.803</td><td class="num" data-label="Levenshtein">0.789</td><td class="num" data-label="Jaro-Winkler">0.870</td><td class="num" data-label="BLEU">0.725</td><td class="num" data-label="Exact match">69.5%</td></tr>
+          <tr><td data-label="Arm">Pure Cloud LLM</td><td class="num" data-label="BERTScore F1">0.753</td><td class="num" data-label="Cosine">0.796</td><td class="num" data-label="Sequence">0.799</td><td class="num" data-label="Levenshtein">0.787</td><td class="num" data-label="Jaro-Winkler">0.870</td><td class="num" data-label="BLEU">0.729</td><td class="num" data-label="Exact match">70.0%</td></tr>
+          <tr><td data-label="Arm"><strong>HydraPoT</strong></td><td class="num" data-label="BERTScore F1">0.757</td><td class="num" data-label="Cosine">0.796</td><td class="num" data-label="Sequence">0.803</td><td class="num" data-label="Levenshtein">0.789</td><td class="num" data-label="Jaro-Winkler">0.869</td><td class="num" data-label="BLEU">0.727</td><td class="num" data-label="Exact match">69.4%</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
   </div>
 </section>
 
